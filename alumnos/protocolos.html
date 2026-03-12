@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protocolos de Seguridad - CBTis 227</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+
+    .top-header {
+      background-color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      border-bottom: 3px solid #A7201F;
+    }
+
+    .top-header img {
+      height: 60px;
+    }
+
+    .logos-left, .logos-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .logos-left img, .logos-right img {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logos-right img:last-child {
+      height: 80px;
+    }
+
+    .logos-left img:first-child {
+      height: 45px;
+    }
+
+    .welcome-banner {
+      background: linear-gradient(135deg, #4d0000 0%, #92000c 100%);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .welcome-banner h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .menu {
+      background-color: #370000;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .menu__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .menu__links {
+      display: flex;
+      list-style: none;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu__item {
+      position: relative;
+      height: 100%;
+      --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+      --transform: rotate(-90deg);
+    }
+
+    .menu__item:hover {
+      --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      --transform: rotate(0);
+    }
+
+    .menu__link {
+      color: #fff;
+      text-decoration: none;
+      padding: 0 25px;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      transition: background-color 0.3s;
+      font-weight: 500;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .menu__link:hover {
+      background-color: #B78629;
+    }
+
+    .menu__arrow {
+      transform: var(--transform);
+      transition: transform .3s;
+      display: block;
+      margin-left: 5px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+    }
+
+    .menu__nesting {
+      list-style: none;
+      transition: clip-path .3s;
+      clip-path: var(--clip);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: max-content;
+      transform: translateY(100%);
+      background-color: #9D9394;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .menu__link--inside {
+      padding: 15px 25px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .menu__link--inside:hover {
+      background-color: #B78629;
+    }
+
+    .breadcrumb {
+      background-color: #f5f5f5;
+      padding: 15px 40px;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: #A7201F;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      color: #B78629;
+    }
+
+    .breadcrumb span {
+      color: #666;
+      margin: 0 10px;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, rgba(167, 32, 31, 0.9), rgba(183, 134, 41, 0.8));
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+
+    .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .content-section {
+      margin-bottom: 40px;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .content-section h2 {
+      color: #A7201F;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      border-bottom: 2px solid #B78629;
+      padding-bottom: 10px;
+    }
+
+    .content-section h3 {
+      color: #4a5568;
+      font-size: 1.3rem;
+      margin: 25px 0 15px;
+      font-weight: 600;
+    }
+
+    .content-section p {
+      line-height: 1.8;
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 1rem;
+      text-align: justify;
+    }
+
+    .content-section ul, .content-section ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+
+    .content-section li {
+      margin-bottom: 12px;
+      line-height: 1.6;
+      color: #333;
+      text-align: justify;
+    }
+
+    .protocolos-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .protocolo-card {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 12px;
+      border-left: 6px solid #A7201F;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .protocolo-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .protocolo-card h3 {
+      color: #A7201F;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .protocolo-card p {
+      margin-bottom: 15px;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .protocolo-link {
+      display: inline-block;
+      background-color: #B78629;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background-color 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .protocolo-link:hover {
+      background-color: #9a6a1f;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+      border-left: 5px solid #B78629;
+      padding: 25px;
+      border-radius: 10px;
+      margin: 25px 0;
+    }
+
+    .highlight-box h4 {
+      color: #856404;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .highlight-box p {
+      color: #856404;
+      margin: 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .info-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #A7201F;
+    }
+
+    .info-card h4 {
+      color: #A7201F;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .info-card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .date-section {
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .date-section p {
+      color: #1565c0;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    footer {
+      background-color: #4d0000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 968px) {
+      .top-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .logos-left, .logos-right {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .top-header img {
+        height: 50px;
+      }
+
+      .welcome-banner h1 {
+        font-size: 1.5rem;
+      }
+
+      .menu {
+        height: auto;
+      }
+
+      .menu__links {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .menu__item {
+        width: 100%;
+        height: auto;
+      }
+
+      .menu__link {
+        padding: 15px;
+        justify-content: center;
+      }
+
+      .menu__nesting {
+        position: static;
+        transform: none;
+        width: 100%;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .content-wrapper {
+        padding: 30px 15px;
+      }
+
+      .content-section {
+        padding: 20px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-header">
+    <div class="logos-left">
+      <img src="../imagenes/sep.png" alt="Logo SEP">
+      <img src="../imagenes/dgeti.png" alt="Logo DGETI">
+    </div>
+    <div class="logos-right">
+      <img src="../imagenes/dgeti.png" alt="Logo DGETI">
+      <img src="../imagenes/cbtis.png" alt="Logo CBTis 227">
+    </div>
+  </div>
+
+  <div class="welcome-banner">
+    <h1>CENTRO DE BACHILLERATO TECNOLÓGICO INDUSTRIAL Y DE SERVICIOS NO.227</h1>
+  </div>
+
+  <nav class="menu">
+    <div class="menu__container">
+      <ul class="menu__links">
+        <li class="menu__item">
+          <a href="/index.html" class="menu__link">INICIO</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="alumnos.html" class="menu__link">
+            ALUMNOS
+            <span class="menu__arrow"></span>
+          </a>
+          <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="tramites.html" class="menu__link menu__link--inside">Tramites/Servicios</a>
+            </li>
+            <li class="menu__inside">
+              <a href="privacidad.html" class="menu__link menu__link--inside">Aviso de privacidad</a>
+            </li>
+            <li class="menu__inside">
+              <a href="protocolos.html" class="menu__link menu__link--inside">Protocolos de seguridad</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menu__item">
+          <a href="/otros/oferta.html" class="menu__link">OFERTA EDUCATIVA</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">SERVICIOS ESCOLARES
+            <span class="menu__arrow"></span>
+          </a>
+       
+         <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="/servicios/becas.html" class="menu__link menu__link--inside">Becas</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/promocion.html" class="menu__link menu__link--inside">Promoción Cultural y Deportiva</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/orientacion.html" class="menu__link menu__link--inside">Orientación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/servicio_social.html" class="menu__link menu__link--inside">Servicio Social y Titulación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/biblioteca.html" class="menu__link menu__link--inside">Biblioteca</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/enfermeria.html" class="menu__link menu__link--inside">Enfermeria</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menu__item">
+          <a href="/otros/acercade.html" class="menu__link">ACERCA DE</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">CONTÁCTANOS</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="breadcrumb">
+    <a href="../index.html">Inicio</a>
+    <span>›</span>
+    <a href="#">Alumnos</a>
+    <span>›</span>
+    <span>Protocolos de Seguridad</span>
+  </div>
+
+  <div class="page-header">
+    <h1>Protocolos de Seguridad</h1>
+    <p>Documentos oficiales vigentes en el CBTis 227</p>
+  </div>
+
+  <div class="content-wrapper">
+    
+    <div class="date-section">
+      <p>Protocolos emitidos por la Secretaría de Educación Pública | Ciclo Escolar 2024-2025</p>
+    </div>
+
+    <section class="content-section">
+      <h2>¿QUÉ SON LOS PROTOCOLOS DE SEGURIDAD ESCOLAR?</h2>
+      <p>
+        La seguridad en el entorno escolar es una prioridad fundamental para garantizar el bienestar físico, emocional y psicológico de todos los miembros de la comunidad educativa. En este contexto, los <strong>protocolos de seguridad escolar</strong> son un conjunto de procedimientos y normas establecidos con el fin de prevenir, responder y actuar de manera eficiente ante situaciones de riesgo o emergencia que puedan surgir dentro o en los alrededores de una institución educativa.
+      </p>
+      <p>
+        Estos protocolos incluyen medidas para enfrentar eventos como desastres naturales, incendios, accidentes, violencia escolar, amenazas externas o internas, y otras situaciones que puedan comprometer la integridad de estudiantes, docentes, personal administrativo y visitantes. Además de reducir los riesgos, los protocolos de seguridad también promueven una cultura de prevención, preparación y responsabilidad compartida entre todos los actores de la comunidad escolar.
+      </p>
+      
+      <div class="highlight-box">
+        <h4>📢 INDICACIONES GENERALES</h4>
+        <p>Se recomienda a la población del CBTis 227 leer detenidamente cada uno de los protocolos aquí mostrados, ya que es nuestra obligación estar enterados de nuestros derechos y obligaciones para tener una convivencia sana, colaborativa, armónica y de seguridad entre todos los integrantes de la comunidad.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>PROTOCOLOS VIGENTES EN EL PLANTEL</h2>
+      <p>A continuación, se presentan los documentos oficiales emitidos por la Secretaría de Educación Pública que actualmente rigen en el CBTis 227. Puedes consultar cada uno haciendo clic en el botón correspondiente.</p>
+      
+      <div class="protocolos-grid">
+        <div class="protocolo-card">
+          <h3>📋 NORMAS DE CONVIVENCIA ESCOLAR</h3>
+          <p><strong>Documento:</strong> CB227_NORMAS-DE-CONVIVENCIA_24-25.pdf</p>
+          <p><strong>Descripción:</strong> Establece las pautas para una convivencia armónica, respetuosa y colaborativa entre todos los miembros de la comunidad escolar durante el ciclo 2024-2025.</p>
+          <a href="/docs/Copia de CB227_NORMAS-DE-CONVIVENCIA_24-25.pdf" class="protocolo-link" target="_blank">📄 Ver / Descargar PDF</a>
+        </div>
+
+        <div class="protocolo-card">
+          <h3>🤝 PROTOCOLO PARA LA CONVIVENCIA ARMÓNICA DEL ESTUDIANTADO EN EMS</h3>
+          <p><strong>Documento:</strong> SEMS_1181_2023</p>
+          <p><strong>Descripción:</strong> Protocolo general para fomentar y mantener una convivencia armónica en los planteles federales de Educación Media Superior.</p>
+          <a href="/docs/SEMS_1181_2023 Protocolo para la convicencia armonica estudiantado EMS (1).pdf" class="protocolo-link" target="_blank">📄 Ver / Descargar PDF</a>
+        </div>
+
+        <div class="protocolo-card">
+          <h3>🛡️ PROTOCOLOS DE SEGURIDAD PARA PLANTELES EMS</h3>
+          <p><strong>Documento:</strong> SEMS_1183_2023</p>
+          <p><strong>Descripción:</strong> Contiene los procedimientos a seguir en situaciones de emergencia, riesgo o seguridad dentro de los planteles de Educación Media Superior.</p>
+          <a href="/docs/SEMS_1183_2023 Protocolos de seguridad planteles EMS (1).pdf" class="protocolo-link" target="_blank">📄 Ver / Descargar PDF</a>
+        </div>
+
+        <div class="protocolo-card">
+          <h3>🎒 PROTOCOLO PARA LA PROTECCIÓN EN REVISIÓN DE ÚTILES ESCOLARES</h3>
+          <p><strong>Documento:</strong> SEMS_1182_2023</p>
+          <p><strong>Descripción:</strong> Establece los lineamientos para realizar revisiones de útiles escolares garantizando la protección y cuidado del estudiantado.</p>
+          <a href="/docs/SEMS_1182_2023 Protocolo para la proteccion del estudiantado en la revision de utiles escolares en los planteles EMS (1).pdf" class="protocolo-link" target="_blank">📄 Ver / Descargar PDF</a>
+        </div>
+
+        <div class="protocolo-card">
+          <h3>⚖️ LINEAMIENTOS PARA LA PREVENCIÓN Y ATENCIÓN DE LA VIOLENCIA SEXUAL</h3>
+          <p><strong>Documento:</strong> Lineamientos_violencia_sexual.pdf</p>
+          <p><strong>Descripción:</strong> Marco de actuación para la prevención, detección y atención de casos de violencia sexual en el entorno escolar.</p>
+          <a href="/docs/Lineamientos para la prevención y atención de la violencia sexual.pdf" class="protocolo-link" target="_blank">📄 Ver / Descargar PDF</a>
+        </div>
+      </div>
+
+      <p style="margin-top: 20px; font-style: italic; color: #666;">
+        * Implementar y mantener actualizados estos protocolos no solo es una obligación institucional, sino también una herramienta esencial para fomentar un ambiente educativo seguro, ordenado y propicio para el aprendizaje y el desarrollo integral de los estudiantes.
+      </p>
+    </section>
+    <!-- ===== SECCIÓN: VISOR DE PDF ===== -->
+<section class="content-section">
+  <h2>OBJETOS NO PERMITIDOS</h2>
+  <p>Ayudanos a mantener un ambiente seguro en la institución</p>
+  
+  <div style="margin: 30px 0; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+    <iframe 
+      src="/docs/objetos no permitidos en mi escuela CBTis 227.pdf" 
+      width="100%" 
+      height="600px" 
+      style="border: none;"
+      title="Infografía Objetos No Permitidos">
+    </iframe>
+  </div>
+  
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="/docs/objetos no permitidos en mi escuela CBTis 227.pdf" download class="protocolo-link" style="background-color: #A7201F; padding: 12px 30px;">  ⬇️ Descargar</a>
+  </div>
+</section>
+<!-- ===== FIN SECCIÓN ===== -->
+    <section class="content-section">
+      <h2>CONTACTO Y ORIENTACIÓN</h2>
+      <p>
+        Si tienes dudas sobre la aplicación de estos protocolos o necesitas orientación sobre algún tema específico, puedes acudir a las siguientes instancias dentro del plantel:
+      </p>
+      
+      <div class="info-grid">
+        <div class="info-card">
+          <h4>🧑‍🏫 Orientación Educativa</h4>
+          <p>Edificio D, planta alta<br>Horario: 8:00 a 16:00 hrs.</p>
+        </div>
+        <div class="info-card">
+          <h4>⚕️ Servicio Médico / Enfermería</h4>
+          <p>Edificio B, planta baja<br>Teléfono: (55) 1234-5678 Ext. 150</p>
+        </div>
+        <div class="info-card">
+          <h4>📧 Correo Institucional</h4>
+          <p>protocolos@cbtis227.edu.mx<br>seguridad.escolar@cbtis227.edu.mx</p>
+        </div>
+        <div class="info-card">
+          <h4>📞 Dirección del Plantel</h4>
+          <p>Tel. (55) 1234-5678 Ext. 200<br>Conmutador: (55) 8765-4321</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="highlight-box" style="margin-top: 20px; background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-left-color: #0284c7;">
+      <h4 style="color: #0369a1;">📌 Fecha de revisión de documentos</h4>
+      <p style="color: #0369a1;"><strong>Documentos vigentes para el ciclo escolar 2024-2025. Próxima actualización programada: Agosto 2025.</strong></p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 CBTis 227 - Centro de Bachillerato Tecnológico Industrial y de Servicios No. 227</p>
+    <p>Otilio Edmundo Montaño Sánchez - Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>

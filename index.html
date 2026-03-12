@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CBTis 227</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+
+    /* Header superior con logos */
+    .top-header {
+      background-color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      border-bottom: 3px solid #A7201F;
+    }
+
+    .top-header img {
+      height: 60px;
+    }
+
+    .logos-left, .logos-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .logos-left img, .logos-right img {
+      height: 50px; /* Ajusta este valor */
+      width: auto; /* Mantiene la proporción */
+      object-fit: contain; /* Evita distorsión */
+    }
+
+    .logos-right img:last-child {
+      height: 80px; /* Aumenta solo el último logo de la derecha */
+    }
+
+    .logos-left img:first-child {
+      height: 45px; /* Aumenta solo el primer logo de la izquierda*/
+    }
+
+    /* Banner de bienvenida */
+    .welcome-banner {
+      background: linear-gradient(135deg, #4d0000 0%, #92000c 100%);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .welcome-banner h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Menú de navegación horizontal */
+    .menu {
+      background-color: #370000;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .menu__container {
+      display: flex;
+  justify-content: center; /* Cambia de center a space-between */
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+    }
+
+    .menu__links {
+      display: flex;
+      list-style: none;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu__item {
+      position: relative;
+      height: 100%;
+      --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+      --transform: rotate(-90deg);
+    }
+
+    .menu__item:hover {
+      --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      --transform: rotate(0);
+    }
+
+    .menu__link {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0 25px;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      transition: background-color 0.3s;
+      font-weight: 500;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .menu__link:hover {
+      background-color: #B78629;
+    }
+
+    .menu__arrow {
+      transform: var(--transform);
+      transition: transform .3s;
+      display: block;
+      margin-left: 5px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+    }
+
+    .menu__nesting {
+      list-style: none;
+      transition: clip-path .3s;
+      clip-path: var(--clip);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: max-content;
+      transform: translateY(100%);
+      background-color: #9D9394;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .menu__link--inside {
+      padding: 15px 25px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .menu__link--inside:hover {
+      background-color: #B78629;
+    }
+
+    /* Hero Section con imagen */
+    .hero {
+      position: relative;
+      min-height: 500px;
+      background: linear-gradient(135deg, rgba(167, 32, 31, 0.7), rgba(157, 147, 148, 0.5));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .hero-content {
+  max-width: 1400px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-mascot-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+    .hero-mascot {
+      width: 100%;
+  max-width: 350px;
+  height: auto;
+  filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));
+  animation: float 3s ease-in-out infinite;
+      }
+
+/* Animación flotante opcional */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+.mascot-title {
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Sección de Noticias */
+.news-section {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  max-height: 450px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #A7201F;
+}
+
+.news-header h2 {
+  color: #A7201F;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.news-header a {
+  color: #B78629;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.news-header a:hover {
+  color: #A7201F;
+}
+
+/* Lista de noticias */
+.news-list {
+  overflow-y: auto;
+  max-height: 320px;
+  padding-right: 10px;
+}
+
+.news-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.news-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.news-list::-webkit-scrollbar-thumb {
+  background: #A7201F;
+  border-radius: 10px;
+}
+
+.news-list::-webkit-scrollbar-thumb:hover {
+  background: #B78629;
+}
+
+.news-item {
+  padding: 15px;
+  margin-bottom: 12px;
+  border-left: 4px solid #A7201F;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.news-item:hover {
+  background-color: #fff;
+  border-left-color: #B78629;
+  transform: translateX(5px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.news-date {
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.news-date::before {
+  content: "📅";
+  font-size: 0.9rem;
+}
+
+.news-title {
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.news-description {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.news-tag {
+  display: inline-block;
+  background-color: #A7201F;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .hero {
+    min-height: auto;
+    padding: 30px 15px;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .hero-mascot {
+    max-width: 250px;
+  }
+
+  .mascot-title {
+    font-size: 1.5rem;
+  }
+
+  .news-section {
+    padding: 20px;
+    max-height: 400px;
+  }
+
+  .news-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .news-list {
+    max-height: 280px;
+  }
+}
+/* Ajuste responsive */
+@media (max-width: 968px) {
+  .hero-mascot {
+    width: 200px;
+  }
+}
+
+    /* Sección de servicios circulares */
+    .services-section {
+      padding: 60px 20px;
+      background-color: #f5f5f5;
+    }
+
+    .services-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      align-items: center;
+    }
+
+    .service-circle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .service-circle:hover {
+      transform: translateY(-10px);
+    }
+
+    .circle {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ab0000 0%, #490000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      padding: 20px;
+    }
+
+    .service-circle:hover .circle {
+      background: linear-gradient(135deg, #B78629 0%, #d4a74a 100%);
+      box-shadow: 0 12px 30px rgba(183, 134, 41, 0.4);
+    }
+
+    /* Búsqueda */
+    .search-container {
+      display: flex;
+  align-items: center;
+    }
+
+    .search-bar {
+      display: flex;
+  gap: 8px;
+    }
+
+    .search-bar input {
+      padding: 3px 5px;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  width: 200px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+    }
+
+    .search-bar button {
+      padding: 3px 5px;
+  background-color: #A7201F;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  transition: background-color 0.3s;
+    }
+
+    .search-bar button:hover {
+      background-color: #B78629;
+    }
+
+    /* Calendario */
+    .calendar-section {
+      padding: 60px 20px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .calendar-section h2 {
+      color: #A7201F;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .calendar {
+      background-color: #9D9394;
+      border-radius: 15px;
+      padding: 25px;
+      color: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .calendar h3 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #4d0000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .top-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .logos-left, .logos-right {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .top-header img {
+        height: 50px;
+      }
+
+      .welcome-banner h1 {
+        font-size: 1.5rem;
+      }
+
+      .menu {
+        height: auto;
+      }
+
+      .menu__links {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .menu__item {
+        width: 100%;
+        height: auto;
+      }
+
+      .menu__link {
+        padding: 15px;
+        justify-content: center;
+      }
+
+      .menu__nesting {
+        position: static;
+        transform: none;
+        width: 100%;
+      }
+
+      .hero {
+        height: 300px;
+      }
+
+      .services-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 30px;
+      }
+
+      .circle {
+        width: 150px;
+        height: 150px;
+        font-size: 1.1rem;
+      }
+
+      .mascot {
+        width: 200px;
+        height: 200px;
+      }
+
+      .search-container {
+        position: static;
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      .search-bar input {
+        width: 200px;
+      }
+    }
+
+    .photo-carousel-section {
+      padding: 0;
+      background-color: #f5f5f5;
+      overflow: hidden;
+    }
+
+    .carousel-container {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.9);
+    }
+
+    .carousel-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .carousel-caption h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+/* Botones de navegación */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(167, 32, 31, 0.8);
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: background-color 0.3s;
+      z-index: 10;
+      border-radius: 5px;
+    }
+
+    .carousel-btn:hover {
+      background-color: rgba(183, 134, 41, 0.9);
+    }
+
+    .carousel-btn.prev {
+      left: 20px;
+    }
+
+    .carousel-btn.next {
+      right: 20px;
+    }
+
+/* Indicadores */
+    .carousel-indicators {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .indicator.active {
+      background-color: #B78629;
+      width: 30px;
+      border-radius: 6px;
+    } 
+
+@media (max-width: 968px) {
+  .carousel-container {
+    height: 300px;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 1.3rem;
+  }
+  
+  .carousel-btn {
+    padding: 10px 15px;
+    font-size: 1.2rem;
+  }
+}
+  </style>
+</head>
+
+<body>
+  <!-- Header superior con logos -->
+  <div class="top-header">
+    <div class="logos-left">
+      <img src="imagenes/sep.png" alt="Logo SEP">
+      <img src="imagenes/dgeti.png" alt="Logo DGETI">
+    </div>
+    <div class="logos-right">
+      <img src="imagenes/dgeti.png" alt="Logo DGETI">
+      <img src="imagenes/cbtis.png" alt="Logo CBTis 227">
+    </div>
+  </div>
+
+  <!-- Banner de bienvenida -->
+  <div class="welcome-banner">
+    <h1>¡BIENVENIDOS AL CENTRO DE BACHILLERATO TECNOLÓGICO<br>INDUSTRIAL Y DE SERVICIOS NO.227!</h1>
+  </div>
+
+  <!-- Menú de navegación -->
+  <nav class="menu">
+    <div class="menu__container">
+      <ul class="menu__links">
+        <li class="menu__item">
+          <a href="#" class="menu__link">INICIO</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="alumnos/alumnos.html" class="menu__link">
+            ALUMNOS
+            <span class="menu__arrow"></span>
+          </a>
+          <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="alumnos/tramites.html" class="menu__link menu__link--inside">Tramites/Servicios</a>
+            </li>
+            <li class="menu__inside">
+              <a href="alumnos/privacidad.html" class="menu__link menu__link--inside">Aviso de privacidad</a>
+            </li>
+            <li class="menu__inside">
+              <a href="alumnos/protocolos.html" class="menu__link menu__link--inside">Protocolos de convivencia</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menu__item">
+          <a href="otros/oferta.html" class="menu__link">OFERTA EDUCATIVA</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">SERVICIOS ESCOLARES
+            <span class="menu__arrow"></span>
+          </a>
+       
+         <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="servicios/becas.html" class="menu__link menu__link--inside">Becas</a>
+            </li>
+            <li class="menu__inside">
+              <a href="servicios/promocion.html" class="menu__link menu__link--inside">Promoción Cultural y Deportiva</a>
+            </li>
+            <li class="menu__inside">
+              <a href="servicios/orientacion.html" class="menu__link menu__link--inside">Orientación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="servicios/servicio_social.html" class="menu__link menu__link--inside">Servicio Social y Titulación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="servicios/biblioteca.html" class="menu__link menu__link--inside">Biblioteca</a>
+            </li>
+            <li class="menu__inside">
+              <a href="servicios/enfermeria.html" class="menu__link menu__link--inside">Enfermeria</a>
+            </li>
+          </ul>
+           </li>
+
+        <li class="menu__item">
+          <a href="otros/acercade.html" class="menu__link">ACERCA DE</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">CONTÁCTANOS</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!--Carrusel-->>
+  <section class="photo-carousel-section">
+  <div class="carousel-container">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide">
+        <img src="imagenes/foto1.jpg" alt="Instalaciones CBTis 227">
+        <div class="carousel-caption">
+          <h3>Nuestras Instalaciones</h3>
+          <p>Espacios modernos para tu aprendizaje</p>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="imagenes/labs3.jpg" alt="Laboratorios">
+        <div class="carousel-caption">
+          <h3>Laboratorios Equipados</h3>
+          <p>Tecnología de vanguardia</p>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="imagenes/foto3.jpg" alt="Estudiantes">
+        <div class="carousel-caption">
+          <h3>Comunidad Estudiantil</h3>
+          <p>Formando profesionales del futuro</p>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <img src="imagenes/foto4.jpg" alt="Talleres">
+        <div class="carousel-caption">
+          <h3>Talleres Especializados</h3>
+          <p>Práctica profesional desde el primer día</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#10094;</button>
+    <button class="carousel-btn next" onclick="moveCarousel(1)">&#10095;</button>
+
+    <div class="carousel-indicators">
+      <span class="indicator active" onclick="goToSlide(0)"></span>
+      <span class="indicator" onclick="goToSlide(1)"></span>
+      <span class="indicator" onclick="goToSlide(2)"></span>
+      <span class="indicator" onclick="goToSlide(3)"></span>
+    </div>
+  </div>
+</section>
+  <!-- Sección de servicios circulares -->
+  <section class="services-section">
+    <div class="services-container">
+      <a href="alumnos/alumnos.html" class="service-circle">
+        <div class="circle">ALUMNOS</div>
+      </a>
+
+      <a href="otros/oferta.html" class="service-circle">
+        <div class="circle">OFERTA</div>
+      </a>
+
+      <a href="#" class="service-circle">
+        <div class="circle">SERVICIOS</div>
+      </a>
+
+      <a href="otros/acercade.html" class="service-circle">
+        <div class="circle">ACERCA DE</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <div class="hero">
+  <div class="hero-content">
+    <!-- Sección de OTI a la izquierda -->
+    <div class="hero-mascot-section">
+      <img src="imagenes/oti.webp" alt="Mascota OTI" class="hero-mascot">
+      <h2 class="mascot-title">¡Bienvenido al CBTis 227!</h2>
+    </div>
+
+    <!-- Sección de Noticias a la derecha -->
+    <div class="news-section">
+      <div class="news-header">
+        <h2>📰 Noticias Recientes</h2>
+        <a href="otros/noticias.html">Ver todas →</a>
+      </div>
+
+      <div class="news-list">
+        <div class="news-item">
+          <div class="news-date">17 de Noviembre, 2025</div>
+          <div class="news-title">Noticia 1</div>
+          <div class="news-description">
+            Informacion noticia 1
+          </div>
+          <span class="news-tag">Instalaciones</span>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">15 de Noviembre, 2025</div>
+          <div class="news-title">Convocatoria de Becas 2025 Abierta</div>
+          <div class="news-description">
+            Ya puedes solicitar tu beca para el ciclo escolar 2025. Revisa los requisitos y fechas límite en el departamento de becas.
+          </div>
+          <span class="news-tag">Becas</span>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">10 de Noviembre, 2025</div>
+          <div class="news-title">Torneo Deportivo Interescolar 2025</div>
+          <div class="news-description">
+            Nuestros equipos de fútbol y básquetbol representarán al plantel en el torneo estatal. ¡Ven a apoyarlos!
+          </div>
+          <span class="news-tag">Deportes</span>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">5 de Noviembre, 2025</div>
+          <div class="news-title">Proceso de Inscripción para Nuevo Ingreso</div>
+          <div class="news-description">
+            Conoce las fechas y requisitos para el proceso de inscripción del ciclo escolar 2025-2026. ¡No te quedes fuera!
+          </div>
+          <span class="news-tag">Inscripciones</span>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">1 de Noviembre, 2025</div>
+          <div class="news-title">Festival Cultural de Día de Muertos</div>
+          <div class="news-description">
+            Exitoso festival donde alumnos mostraron ofrendas tradicionales y participaron en actividades culturales.
+          </div>
+          <span class="news-tag">Eventos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="content-section" style="margin-top: 40px;">
+  <h2 style="text-align: center; margin-bottom: 30px;">CALENDARIO ESCOLAR Y UBICACIÓN</h2>
+  
+  <!-- Contenedor flexible para los dos elementos -->
+  <div style="display: flex; flex-wrap: wrap; gap: 25px;">
+    
+    <!-- COLUMNA IZQUIERDA: PDFs DE CALENDARIOS -->
+    <div style="flex: 1; min-width: 300px;">
+      <div style="background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); height: 100%;">
+        <h3 style="color: #A7201F; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #B78629; padding-bottom: 10px;">
+          <span style="font-size: 28px;">📅</span> Calendario Escolar
+        </h3>
+        
+        <!-- Calendario 2024-2025 -->
+        
+        <!-- Calendario 2025-2026 -->
+        <div style="background: linear-gradient(135deg, #f8f9fa, #ffffff); border-radius: 12px; padding: 20px; border-left: 5px solid #B78629; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+          <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+            <span style="font-size: 40px;">📅</span>
+            <div>
+              <h4 style="color: #333; font-size: 1.2rem; margin-bottom: 5px;">Ciclo Escolar 2025-2026</h4>
+              <p style="color: #666; font-size: 0.9rem;">Próximo: Agosto 2025 - Julio 2026</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <a href="/docs/Calendario-Escolar-DGETI-2025-2026_copia.pdf" target="_blank" class="protocolo-link" style="background-color: #A7201F; padding: 8px 15px; font-size: 0.9rem; color: #ffffff;">Ver Calendario</a>
+            <a href="/docs/Calendario-Escolar-DGETI-2025-2026_copia.pdf" download class="protocolo-link" style="background-color: #B78629; padding: 8px 15px; font-size: 0.9rem; color: #ffffff;">Descargar</a>
+          </div>
+        </div>
+        
+        <!-- Información adicional -->
+        <div style="margin-top: 20px; background: #e8f4fd; padding: 15px; border-radius: 10px; text-align: center;">
+          <p style="color: #0369a1; margin: 0; font-size: 0.9rem;">
+            ⏰ * El calendario incluye días festivos, periodos vacacionales y fechas de inscripción
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- COLUMNA DERECHA: UBICACIÓN CON MAPA -->
+    <div style="flex: 1; min-width: 300px;">
+      <div style="background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); height: 100%;">
+        <h3 style="color: #A7201F; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 28px;">📍</span> Nuestra Ubicación
+        </h3>
+        
+        <!-- Tarjeta de dirección mejorada -->
+        <div style="background: linear-gradient(135deg, #f8f9fa, #ffffff); padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #B78629;">
+          <p style="font-weight: 600; margin-bottom: 5px;">CBTis 227</p>
+          <p style="color: #555; font-size: 0.95rem;">Av. Paseo del Ferrocarril 99, Los Reyes Ixtacala, 54090 Tlalnepantla, Méx.</p>
+          <div style="display: flex; gap: 15px; margin-top: 10px; font-size: 0.9rem; color: #666;">
+            <span>🕒 6:30 - 19:50 hrs</span>
+            <span>📞 (55) 1234-5678</span>
+          </div>
+        </div>
+        
+        <!-- Mapa -->
+        <div style="border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d3760.5426097269524!2d-99.1857183!3d19.5183047!3m2!1i1024!2i768!4f13.1!2m1!1scbtis%20227!5e0!3m2!1ses-419!2smx!4v1772938601140!5m2!1ses-419!2smx" 
+            style="width: 100%; height: 350px; border: 0;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+        
+        <!-- Botón de Google Maps -->
+        <div style="text-align: center; margin-top: 15px;">
+          <a href="https://maps.google.com/?q=CBTis+227+Tlalnepantla" 
+             target="_blank" 
+             style="display: inline-block; background: #A7201F; color: white; text-decoration: none; padding: 8px 20px; border-radius: 8px; font-weight: 500; font-size: 0.95rem; transition: background 0.3s;"
+             onmouseover="this.style.background='#B78629'"
+             onmouseout="this.style.background='#A7201F'">
+            🗺️ Abrir en Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+<!-- ===== FIN SECCIÓN CALENDARIO + MAPA ===== -->
+<!-- ===== FIN SECCIÓN ===== -->
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 CBTis 227 - Centro de Bachillerato Tecnológico Industrial y de Servicios No. 227</p>
+    <p>Otilio Edmundo Montaño Sánchez - Todos los derechos reservados</p>
+  </footer>
+  <script>
+let currentSlide = 0;
+const track = document.getElementById('carouselTrack');
+const slides = document.querySelectorAll('.carousel-slide');
+const indicators = document.querySelectorAll('.indicator');
+const totalSlides = slides.length;
+
+function updateCarousel() {
+  track.style.transform = `translateX(-${currentSlide * 100}%)`;
+  
+  indicators.forEach((indicator, index) => {
+    indicator.classList.toggle('active', index === currentSlide);
+  });
+}
+
+function moveCarousel(direction) {
+  currentSlide += direction;
+  
+  if (currentSlide < 0) {
+    currentSlide = totalSlides - 1;
+  } else if (currentSlide >= totalSlides) {
+    currentSlide = 0;
+  }
+  
+  updateCarousel();
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  updateCarousel();
+}
+
+// Auto-play (opcional)
+setInterval(() => {
+  moveCarousel(1);
+}, 5000);
+</script>
+</body>
+</html>

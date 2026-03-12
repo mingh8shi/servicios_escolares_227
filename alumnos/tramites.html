@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla de Trámites - CBTis 227</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+
+    .top-header {
+      background-color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      border-bottom: 3px solid #A7201F;
+    }
+
+    .top-header img {
+      height: 60px;
+    }
+
+    .logos-center, .logos-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .logos-center img, .logos-right img {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logos-right img:last-child {
+      height: 80px;
+    }
+
+    .logos-center img:first-child {
+      height: 45px;
+    }
+
+    .welcome-banner {
+      background: linear-gradient(135deg, #4d0000 0%, #92000c 100%);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .welcome-banner h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .menu {
+      background-color: #370000;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .menu__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .menu__links {
+      display: flex;
+      list-style: none;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu__item {
+      position: relative;
+      height: 100%;
+      --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+      --transform: rotate(-90deg);
+    }
+
+    .menu__item:hover {
+      --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      --transform: rotate(0);
+    }
+
+    .menu__link {
+      color: #fff;
+      text-decoration: none;
+      padding: 0 25px;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      transition: background-color 0.3s;
+      font-weight: 500;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .menu__link:hover {
+      background-color: #B78629;
+    }
+
+    .menu__arrow {
+      transform: var(--transform);
+      transition: transform .3s;
+      display: block;
+      margin-center: 5px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+    }
+
+    .menu__nesting {
+      list-style: none;
+      transition: clip-path .3s;
+      clip-path: var(--clip);
+      position: absolute;
+      center: 0;
+      bottom: 0;
+      width: max-content;
+      transform: translateY(100%);
+      background-color: #9D9394;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .menu__link--inside {
+      padding: 15px 25px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .menu__link--inside:hover {
+      background-color: #B78629;
+    }
+
+    .breadcrumb {
+      background-color: #f5f5f5;
+      padding: 15px 40px;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: #A7201F;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      color: #B78629;
+    }
+
+    .breadcrumb span {
+      color: #666;
+      margin: 0 10px;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, rgba(167, 32, 31, 0.9), rgba(119, 119, 119, 0.8));
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .department-selector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 50px;
+      padding: 30px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .dept-btn {
+      padding: 15px 30px;
+      background: white;
+      border: 2px solid #A7201F;
+      color: #A7201F;
+      font-weight: 600;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .dept-btn:hover {
+      background: #A7201F;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(167, 32, 31, 0.3);
+    }
+
+    .dept-btn.active {
+      background: #A7201F;
+      color: white;
+      box-shadow: 0 4px 15px rgba(167, 32, 31, 0.4);
+    }
+
+    .department-section {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+
+    .department-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      color: #A7201F;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 4px solid #B78629;
+      font-weight: 700;
+    }
+
+    .tramites-table {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+    .table-header {
+      background: linear-gradient(135deg, #A7201F 0%, #8a1a19 100%);
+      color: white;
+      padding: 20px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .table-header .icon {
+      font-size: 2rem;
+    }
+
+    .tramite-item {
+      border-bottom: 1px solid #e9ecef;
+      transition: all 0.3s;
+    }
+
+    .tramite-item:last-child {
+      border-bottom: none;
+    }
+
+    .tramite-item:hover {
+      background: #f8f9fa;
+    }
+
+    .tramite-header {
+      padding: 25px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .tramite-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+    }
+
+    .tramite-title h3 {
+      color: #A7201F;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .tramite-icon {
+      font-size: 1.8rem;
+    }
+
+    .expand-icon {
+      font-size: 1.5rem;
+      color: #B78629;
+      transition: transform 0.3s;
+    }
+
+    .tramite-item.expanded .expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .tramite-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .tramite-item.expanded .tramite-content {
+      max-height: 2000px;
+    }
+
+    .tramite-details {
+      padding: 0 25px 25px 25px;
+      background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .info-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      border-center: 4px solid #B78629;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .info-box h4 {
+      color: #A7201F;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-box p, .info-box ul {
+      color: #555;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .info-box ul {
+      padding-center: 20px;
+      margin-top: 10px;
+    }
+
+    .info-box li {
+      margin-bottom: 8px;
+    }
+
+    .steps-container {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      border: 2px solid #e9ecef;
+      margin-top: 20px;
+    }
+
+    .steps-container h4 {
+      color: #A7201F;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .step {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px dashed #dee2e6;
+    }
+
+    .step:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .step-number {
+      background: linear-gradient(135deg, #A7201F, #B78629);
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-content p {
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .alert-box {
+      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+      border-center: 5px solid #ffc107;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .alert-box h4 {
+      color: #856404;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .alert-box p {
+      color: #856404;
+      margin: 5px 0;
+      line-height: 1.6;
+    }
+
+    .search-box {
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 15px 50px 15px 20px;
+      border: 2px solid #dee2e6;
+      border-radius: 25px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #A7201F;
+      box-shadow: 0 0 0 3px rgba(167, 32, 31, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #A7201F;
+      font-size: 1.3rem;
+    }
+
+    footer {
+      background-color: #4d0000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 968px) {
+      .top-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .logos-center, .logos-right {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .welcome-banner h1 {
+        font-size: 1.5rem;
+      }
+
+      .menu {
+        height: auto;
+      }
+
+      .menu__links {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .menu__item {
+        width: 100%;
+        height: auto;
+      }
+
+      .menu__link {
+        padding: 15px;
+        justify-content: center;
+      }
+
+      .menu__nesting {
+        position: static;
+        transform: none;
+        width: 100%;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dept-btn {
+        width: 100%;
+      }
+
+      /* Estilos para la tabla*/
+/* Estilos para la tabla UNAM compacta */
+.tramites-table table {
+  font-size: 0.85rem !important;
+}
+
+.tramites-table table th {
+  font-weight: 600;
+  padding: 12px 15px !important;
+}
+
+.tramites-table table td {
+  padding: 15px !important;
+  line-height: 1.4 !important;
+}
+
+.tramites-table table thead th:first-child {
+  width: 22%;
+}
+
+.tramites-table table thead th:nth-child(2) {
+  width: 10%;
+}
+
+.tramites-table table thead th:nth-child(3) {
+  width: 15%;
+}
+
+.tramites-table table thead th:nth-child(4) {
+  width: 18%;
+}
+
+.tramites-table table thead th:nth-child(5) {
+  width: 35%;
+}
+
+/* Mejor distribución de columnas */
+.tramites-table table td strong {
+  font-size: 0.9rem;
+}
+
+.tramites-table table td span,
+.tramites-table table td div {
+  font-size: 0.85rem;
+}
+
+.tramites-table table ul {
+  margin: 8px 0 8px 15px !important;
+  padding-center: 5px !important;
+}
+
+.tramites-table table li {
+  margin-bottom: 5px !important;
+}
+/* Responsive para la tabla */
+@media (max-width: 968px) {
+  .tramites-table table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .tramites-table table thead th {
+    min-width: 200px;
+  }
+  
+  .tramites-table table tbody td {
+    min-width: 200px;
+  }
+}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-header">
+    <div class="logos-center">
+      <img src="../imagenes/sep.png" alt="Logo SEP">
+      <img src="../imagenes/dgeti.png" alt="Logo DGETI">
+    </div>
+    <div class="logos-right">
+      <img src="../imagenes/dgeti.png" alt="Logo DGETI">
+      <img src="../imagenes/cbtis.png" alt="Logo CBTis 227">
+    </div>
+  </div>
+
+  <div class="welcome-banner">
+    <h1>CENTRO DE BACHILLERATO TECNOLÓGICO INDUSTRIAL Y DE SERVICIOS NO.227</h1>
+  </div>
+
+<nav class="menu">
+    <div class="menu__container">
+      <ul class="menu__links">
+        <li class="menu__item">
+          <a href="/index.html" class="menu__link">INICIO</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="alumnos.html" class="menu__link">
+            ALUMNOS
+            <span class="menu__arrow"></span>
+          </a>
+          <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="tramites.html" class="menu__link menu__link--inside">Tramites/Servicios</a>
+            </li>
+            <li class="menu__inside">
+              <a href="privacidad.html" class="menu__link menu__link--inside">Aviso de privacidad</a>
+            </li>
+            <li class="menu__inside">
+              <a href="#" class="menu__link menu__link--inside">Protocolos de convivencia</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menu__item">
+          <a href="/otros/oferta.html" class="menu__link">OFERTA EDUCATIVA</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">SERVICIOS ESCOLARES
+            <span class="menu__arrow"></span>
+          </a>
+       
+         <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="/servicios/becas.html" class="menu__link menu__link--inside">Becas</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/promocion.html" class="menu__link menu__link--inside">Promoción Cultural y Deportiva</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/orientacion.html" class="menu__link menu__link--inside">Orientación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/servicio_social.html" class="menu__link menu__link--inside">Servicio Social y Titulación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/biblioteca.html" class="menu__link menu__link--inside">Biblioteca</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/enfermeria.html" class="menu__link menu__link--inside">Enfermeria</a>
+            </li>
+          </ul>
+           </li>
+
+        <li class="menu__item">
+          <a href="/otros/acercade.html" class="menu__link">ACERCA DE</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">CONTÁCTANOS</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="breadcrumb">
+    <a href="../index.html">Inicio</a>
+    <span>›</span>
+    <a href="#">Alumnos</a>
+    <span>›</span>
+    <span>Trámites y Servicios</span>
+  </div>
+
+  <div class="page-header">
+    <h1>Trámites y servicios</h1>
+    <p>Consulta los requisitos y procedimientos para realizar tus trámites escolares</p>
+  </div>
+
+  <!-- ... (mantén todo lo anterior hasta la sección de contenido) ... -->
+
+<div class="content-wrapper">
+  <div class="tramites-table">
+    <div class="table-header">
+      <span class="icon"></span>
+      <span>CÁTALOGO GENERAL DE TRAMITES</span>
+    </div>
+<br>
+    <div class="tramite-details" style="padding: 0;">
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-family: 'Poppins', sans-serif; font-size: 0.85rem;">
+          <thead>
+            <tr style="background: linear-gradient(135deg, #A7201F 0%, #8a1a19 100%); color: white;">
+              <th style="padding: 15px; text-align: center; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.2); width: 15%;">Oficina</th>
+              <th style="padding: 15px; text-align: center; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.2); width: 20%;">Trámite</th>
+              <th style="padding: 15px; text-align: center; font-weight: 600; border-right: 1px solid rgba(255,255,255,0.2); width: 30%;">Pasos</th>
+              <th style="padding: 15px; text-align: center; font-weight: 600; width: 35%;">Requisitos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #eee;">
+              <td style="padding: 15px; vertical-align: top; background-color: #fdf2f2; font-weight: 600; color: #A7201F;">Becas</td>
+              <td style="padding: 15px; vertical-align: top; font-weight: 600;">Entrega de tarjetas Bienestar</td>
+              <td style="padding: 15px; vertical-align: top;">1. Estar al pendiente de los avisos colocados en el plantel con la fecha, lugar y hora para acudir a la entrega de la tarjeta.<br>2. Estar al pendiente del correo electrónico del padre, madre o tutor y del alumno para recibir la información oficial.<br>3. Consultar las redes sociales oficiales Becas Bienestar.<br><img src="/imagenes/qr_feo.png"></td>
+              <td style="padding: 15px; vertical-align: top;">Estar inscrito en el semestre correspondiente.<br>• SI ERES MENOR DE EDAD:<br>•Acudir acompañado de la madre, padre o tutor<br>ORIGINAL Y COPIA DE LOS SIGUIENTES DOCUMENTOS DE LA MADRE, PADRE O TUTOR<br>• Identificación oficial (INE).<br>• Acta de nacimiento actualizada.<br>• CURP actualizado.<br>• Comprobante de domicilio (no mayor a 3 meses) DE LA O EL ESTUDIANTE ORIGINAL Y COPIA<br>• Acta de nacimiento actualizada.<br>• CURP actualizado.<br>• Credencial del plantel. <br>• SI ERES MAYOR DE EDAD<br>• Identificación oficial (INE).<br>• Acta de nacimiento actualizada.<br>• CURP actualizado.<br>• Comprobante de domicilio (no mayor a 3 meses).<br>• Credencial del plantel.</td>
+            </tr>
+
+            <tr style="border-bottom: 1px solid #eee;">
+              <td rowspan="3" style="padding: 15px; vertical-align: top; background-color: #fff9ed; font-weight: 600; color: #B78629; border-bottom: 1px solid #eee;">Servicio Social y Titulación</td>
+              <td style="padding: 15px; vertical-align: top; font-weight: 600;">TITULACION DE EGRESADOS</td>
+              <td style="padding: 15px; vertical-align: top;">• CONVOCATORIA ALUMNOS 6º.SEMESTRE<br>• INFORMACION EN SALON ALUMNOS DE 6º.SEMESTRE<br>• ENTREGA DOCUMENTACION AGOSTO 2026</td>
+              <td style="padding: 15px; vertical-align: top;">• COPIA ACTA NACIMIENTO <br>• CURP ACTUALIZADO <br>• COPIA CERTIFICADO SECUNDARIA.<br>• CERTIFICADO DE TERMINACION DE BACHILLERATO. <br>• 5 CARTAS DE COMPETENCIAS.<br>• 2 FOTOGRAFIAS TAMAÑO TITULO B/N, PAPEL MATE, FONDO CLARO y ROPA CLARA FORMAL.<br>• FOLDER Y PORTA HOJAS.<br>• CARTA DE TERMINO SERVICIO SOCIAL.<br>• CARTA DE ACREDITACION DEL AREA SERVICIO SOCIAL</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+              <td style="padding: 15px; vertical-align: top; font-weight: 600;">TRAMITE DE SERVICIO SOCIAL</td>
+              <td style="padding: 15px; vertical-align: top;">•CONVOCATORIA ALUMNOS 4º. Y 6º.SEMESTRE<br>• INFORMACION EN SALON ALUMNOS DE 4º. Y 6º.SEMESTRE</td>
+              <td style="padding: 15px; vertical-align: top;">• COPIA ACTA NACIMIENTO<br>• CURP ACTUALIZADO<br>• COPIA CERTIFICADO SECUNDARIA.<br>• FOLDER Y PORTA HOJAS<br>• HISTORIAL ACADEMICO SIN MATERIAS REPROBADAS</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #eee;">
+              <td style="padding: 15px; vertical-align: top; font-weight: 600;">TRAMITE DE ACREDITACIONES</td>
+              <td style="padding: 15px; vertical-align: top;">• INFORMACION EN SALON ALUMNOS DE 6º.SEMESTRE<br>• ENTREGA DE DOCUMENTACION Y CARTA DE TERMINACION</td>
+              <td style="padding: 15px; vertical-align: top;">• COPIA ACTA NACIMIENTO<br>• CURP ACTUALIZADO<br>• COPIA DE CERTIFICADO DE TERMINACION DE BACHILLERATO<br>• 2 FOTOGRAFIAS TAMAÑO DIPLOMA B/N, PAPEL MATE, FONDO CLARO y ROPA CLARA FORMAL.<br>• FOLDER Y PORTA HOJAS<br>• CARTA DE TERMINO SERVICIO SOCIAL AL TERMINO DEL SERVICIO SOCIAL<br>• HOJA DE DATOS PERSONALES</td>
+            </tr>
+
+            <tr style="border-bottom: 1px solid #dee2e6;">
+              <td rowspan="5" style="padding: 20px; text-align: center; vertical-align: middle; background-color: #fdf2f2; font-weight: 700; color: #A7201F; border-right: 1px solid #dee2e6;">Control Escolar</td>
+
+              <td style="padding: 15px; vertical-align: top; font-weight: 600; border-right: 1px solid #dee2e6;">Historial Académico (Actualización)</td>
+  <td style="padding: 15px; vertical-align: top; border-right: 1px solid #dee2e6;">
+    1. Solicitar y registrarse en Control Escolar para la reimpresión proporcionando: nombre completo, generación, grupo y especialidad.<br>
+    2. Realizar pago en <strong>Banco BBVA (Cuenta: 0114668847)</strong> a nombre de Asociación Escolar de Administración Participativa del CBTis 227.<br>
+    3. Referencia: Colocar CURP o nombre del alumno.<br>
+    4. Entregar en Servicios Financieros boucher original y 2 copias (anotar nombre, semestre, especialidad, grupo y turno).<br>
+    5. Entregar copia del pago sellada en Control Escolar.
+  </td>
+  <td style="padding: 15px; vertical-align: top;">
+    • Registro en Control Escolar.<br>
+    • Credencial escolar o identificación oficial (ex alumnos).<br>
+    • Pago de derechos.<br>
+    <strong>Tiempo estimado:</strong> 1 a 3 días hábiles.<br>
+    <strong>Nota:</strong> Puede realizarlo el interesado, padre o tutor.
+  </td>
+</tr>
+
+<tr style="border-bottom: 1px solid #dee2e6;">
+  <td style="padding: 15px; vertical-align: top; font-weight: 600; border-right: 1px solid #dee2e6;">Duplicado o Reposición de Certificado de Término</td>
+  <td style="padding: 15px; vertical-align: top; border-right: 1px solid #dee2e6;">
+    1. Solicitar formato en Control Escolar.<br>
+    2. Extravío: Levantar acta ante el M.P. o en línea (debe contener el folio del certificado) y entregar original.<br>
+    3. Descargar línea de captura e5 en: <a href="https://www.sep.gob.mx/work/appsite/e5_ene12/dpa/hojaayuda.html?institucion=dgeti" target="_blank" style="color: #A7201F;">sep.gob.mx (Hoja de ayuda)</a>.<br>
+    4. Pagar en banco (excepto Coppel/Azteca).<br>
+    5. Canjear boucher y línea de captura en Servicios Financieros (Original y 2 copias).<br>
+    6. Entregar expediente en Control Escolar.
+  </td>
+  <td style="padding: 15px; vertical-align: top;">
+    • Solicitud de trámite.<br>
+    • Copia de Acta de Nacimiento, CURP actualizado, Certificado de Secundaria y Bachillerato (o historial).<br>
+    • 2 fotos infantil (B/N o color, mate, fondo y ropa clara).<br>
+    • Boucher y línea de captura e5.<br>
+    <strong>Tiempo estimado:</strong> 1 a 4 meses.<br>
+    <strong>Nota:</strong> Entrega de original solo al interesado.
+  </td>
+</tr>
+
+<tr style="border-bottom: 1px solid #dee2e6;">
+  <td style="padding: 15px; vertical-align: top; font-weight: 600; border-right: 1px solid #dee2e6;">Constancia de Estudios o Trámite en Tránsito</td>
+  <td style="padding: 15px; vertical-align: top; border-right: 1px solid #dee2e6;">
+    1. Registrarse en Control Escolar indicando nombre, generación, grupo, especialidad y si requiere foto o especificación detallada.<br>
+    2. Pago en BBVA (Cuenta: 0114668847) con nombre/CURP como referencia.<br>
+    3. Entregar original y 2 copias en Servicios Financieros.<br>
+    4. Entregar copia sellada en Control Escolar.
+  </td>
+  <td style="padding: 15px; vertical-align: top;">
+    • Registro en Control Escolar.<br>
+    • Credencial o identificación oficial.<br>
+    • Pago de derechos.<br>
+    • Copia de comprobante de trámite en tránsito (si aplica).<br>
+    <strong>Tiempo estimado:</strong> 1 a 3 días hábiles.
+  </td>
+</tr>
+
+<tr style="border-bottom: 1px solid #dee2e6;">
+  <td style="padding: 15px; vertical-align: top; font-weight: 600; border-right: 1px solid #dee2e6;">Certificado Parcial</td>
+  <td style="padding: 15px; vertical-align: top; border-right: 1px solid #dee2e6;">
+    1. Solicitar por escrito mediante formato de Control Escolar.<br>
+    2. Descargar línea de captura e5 (Persona Física - Duplicado de Certificados E.M.S.).<br>
+    3. Pago en banco y canje de boucher en Servicios Financieros.<br>
+    4. Entrega de documentos en Control Escolar.
+  </td>
+  <td style="padding: 15px; vertical-align: top;">
+    • Solicitud del trámite.<br>
+    • Copia de historial académico actualizado.<br>
+    • Copia de INE del padre o tutor.<br>
+    • 2 fotos tamaño infantil (B/N o color, mate).<br>
+    <strong>Tiempo estimado:</strong> 1 a 2 meses.
+  </td>
+</tr>
+
+<tr style="border-bottom: 1px solid #dee2e6;">
+  <td style="padding: 15px; vertical-align: top; font-weight: 600; border-right: 1px solid #dee2e6;">Validación de Certificados expedidos en CBTis 227</td>
+  <td style="padding: 15px; vertical-align: top; border-right: 1px solid #dee2e6;">
+    1. Interesado: Acudir a Control Escolar para registro.<br>
+    2. Dependencias: Solicitar por correo oficial (cbtis227.dir@dgeti.sems.gob.mx con copia a rodrigo.hernandez@cbtis227.edu.mx) mediante oficio dirigido al Director con el certificado en PDF.<br>
+    3. Pago en BBVA y validación en Servicios Financieros.
+  </td>
+  <td style="padding: 15px; vertical-align: top;">
+    • Identificación oficial.<br>
+    • Copia del certificado por ambos lados.<br>
+    • Oficio de la dependencia (si no es el interesado).<br>
+    • Pago de derechos.<br>
+    <strong>Tiempo estimado:</strong> 1 a 3 días hábiles.
+  </td>
+</tr>
+  <tr>
+    <td style="padding: 15px; vertical-align: top; background-color: #fff9ed; font-weight: 600; color: #B78629;">Orientación Escolar</td>
+    <td style="padding: 15px; vertical-align: top; font-weight: 600;">Solicitud de JUSTIFICANTE</td>
+    <td style="padding: 15px; vertical-align: top;">Toda justificación PERSONAL de inasistencias se solicitará en la Ofna. de Orientación Educativa, observando las siguientes condiciones: <br>1. Por problemas familiares: presentarse en Orientación Educativa en compañía de al menos uno de los padres o tutor legal; en caso de poder asistir traer en su copia de su credencial del INE del tutor el motivo firmada y con un número telefónico.<br>2. Por cuestiones laborales del alumno (a): presentar en papel membretado de la empresa donde labora, su oficio comisión que originó su inasistencia la cual no deberá ser superior a 1 día.<br>6. Si el alumno participó en eventos organizados por el plantel, será el responsable o asesor de dicho evento quien tramite el justificante correspondiente ante Orientación Educativa.<br>Nota: Solo se extienden tres justificantes por periodo a evaluar.</td>
+    <td style="padding: 15px; vertical-align: top;">1. Solicitar el justificante de inasistencia en un plazo de 3 días (72 hrs.) como máximo posterior a su incorporación al plantel.<br>Solo se extienden tres justificantes por periodo a evaluar.</td>
+  </tr>
+  <tr>
+    <td style="padding: 15px; vertical-align: top; background-color: #fdf2f2; font-weight: 600; color: #A7201F;">Enfermería</td>
+    <td style="padding: 15px; vertical-align: top; font-weight: 600;">Solicitud de JUSTIFICANTE</td>
+    <td style="padding: 15px; vertical-align: top;">Toda justificación con motivo medico se hara en la oficina de Enfermeria. Para obtener tu justificante deberas de cumplir con los siguientes requisitos: <br>1. Receta medica original y copia. <br>2. Haber entregado previamente Pre Alta del IMSS.<br>3. Haber entregado previamente tu Certificado Medico (Original y copia).</td>
+    <td style="padding: 15px; vertical-align: top;" >1. Solicitar el justificante dentro de las 72 hrs habiles posterior a su incorporación al plantel.
+  </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <footer>
+    <p>&copy; 2025 CBTis 227 - Centro de Bachillerato Tecnológico Industrial y de Servicios No. 227</p>
+    <p>Última actualización: Marzo 2026</p>
+  </footer>
+
+  <script>
+    // Department selector
+    const deptButtons = document.querySelectorAll('.dept-btn');
+    const deptSections = document.querySelectorAll('.department-section');
+
+    deptButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetDept = btn.dataset.dept;
+        
+        deptButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        deptSections.forEach(section => {
+          section.classList.remove('active');
+          if (section.id === targetDept) {
+            section.classList.add('active');
+          }
+        });
+
+        window.scrollTo({ top: 400, behavior: 'smooth' });
+      });
+    });
+
+    // Expandable tramite items
+    const tramiteItems = document.querySelectorAll('.tramite-item');
+
+    tramiteItems.forEach(item => {
+      const header = item.querySelector('.tramite-header');
+      
+      header.addEventListener('click', () => {
+        const isExpanded = item.classList.contains('expanded');
+        
+        tramiteItems.forEach(i => i.classList.remove('expanded'));
+        
+        if (!isExpanded) {
+          item.classList.add('expanded');
+        }
+      });
+    });
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      
+      tramiteItems.forEach(item => {
+        const title = item.querySelector('.tramite-title h3').textContent.toLowerCase();
+        const content = item.querySelector('.tramite-details').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || content.includes(searchTerm)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acerca de - CBTis 227</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+
+    /* Header superior con logos */
+    .top-header {
+      background-color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      border-bottom: 3px solid #A7201F;
+    }
+
+    .top-header img {
+      height: 60px;
+    }
+
+    .logos-left, .logos-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .logos-left img, .logos-right img {
+      height: 50px; /* Ajusta este valor */
+      width: auto; /* Mantiene la proporción */
+      object-fit: contain; /* Evita distorsión */
+    }
+
+    .logos-right img:last-child {
+      height: 80px; /* Aumenta solo el último logo de la derecha */
+    }
+
+    .logos-left img:first-child {
+      height: 45px; /* Aumenta solo el primer logo de la izquierda */
+    }
+    /* Banner de bienvenida */
+    .welcome-banner {
+      background: linear-gradient(135deg, #4d0000 0%, #92000c 100%);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .welcome-banner h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Menú de navegación horizontal */
+    .menu {
+      background-color: #370000;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .menu__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .menu__links {
+      display: flex;
+      list-style: none;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu__item {
+      position: relative;
+      height: 100%;
+      --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+      --transform: rotate(-90deg);
+    }
+
+    .menu__item:hover {
+      --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      --transform: rotate(0);
+    }
+
+    .menu__link {
+      color: #fff;
+      text-decoration: none;
+      padding: 0 25px;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      transition: background-color 0.3s;
+      font-weight: 500;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .menu__link:hover {
+      background-color: #B78629;
+    }
+
+    .menu__arrow {
+      transform: var(--transform);
+      transition: transform .3s;
+      display: block;
+      margin-left: 5px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+    }
+
+    .menu__nesting {
+      list-style: none;
+      transition: clip-path .3s;
+      clip-path: var(--clip);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: max-content;
+      transform: translateY(100%);
+      background-color: #9D9394;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .menu__link--inside {
+      padding: 15px 25px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .menu__link--inside:hover {
+      background-color: #B78629;
+    }
+
+    /* Breadcrumb - Migas de pan */
+    .breadcrumb {
+      background-color: #f5f5f5;
+      padding: 15px 40px;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: #A7201F;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      color: #B78629;
+    }
+
+    .breadcrumb span {
+      color: #666;
+      margin: 0 10px;
+    }
+
+    /* Contenido principal de subpáginas */
+    .page-header {
+      background: linear-gradient(135deg, rgba(167, 32, 31, 0.9), rgba(183, 134, 41, 0.8));
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .content-section {
+      margin-bottom: 50px;
+    }
+
+    .content-section h2 {
+      color: #A7201F;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      border-bottom: 3px solid #B78629;
+      padding-bottom: 10px;
+    }
+
+    .content-section h3 {
+      color: #4a5568;
+      font-size: 1.5rem;
+      margin: 30px 0 15px;
+      font-weight: 600;
+    }
+
+    .content-section p {
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 1.05rem;
+    }
+
+    .content-section ul, .content-section ol {
+      margin: 20px 0;
+      padding-left: 30px;
+    }
+
+    .content-section li {
+      margin-bottom: 15px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Cards de información */
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-top: 5px solid #A7201F;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .info-card h3 {
+      color: #A7201F;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+
+    .info-card p {
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .info-card .icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    /* Botones de acción */
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: #A7201F;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s;
+      margin: 10px 5px;
+    }
+
+    .btn:hover {
+      background-color: #B78629;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(183, 134, 41, 0.4);
+    }
+
+    .btn-secondary {
+      background-color: #4a5568;
+    }
+
+    .btn-secondary:hover {
+      background-color: #2d3748;
+    }
+
+    /* Alertas/Avisos importantes */
+    .alert {
+      background-color: #fff3cd;
+      border-left: 5px solid #B78629;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+    }
+
+    .alert h4 {
+      color: #856404;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .alert p {
+      color: #856404;
+      margin: 0;
+    }
+
+    /* Tablas */
+    .table-container {
+      overflow-x: auto;
+      margin: 30px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    table thead {
+      background: linear-gradient(135deg, #A7201F, #B78629);
+      color: white;
+    }
+
+    table th, table td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    table tbody tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    table tbody tr:hover {
+      background-color: #e9ecef;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #4d0000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+      margin-top: 60px;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .top-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .logos-left, .logos-right {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .top-header img {
+        height: 50px;
+      }
+
+      .welcome-banner h1 {
+        font-size: 1.5rem;
+      }
+
+      .menu {
+        height: auto;
+      }
+
+      .menu__links {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .menu__item {
+        width: 100%;
+        height: auto;
+      }
+
+      .menu__link {
+        padding: 15px;
+        justify-content: center;
+      }
+
+      .menu__nesting {
+        position: static;
+        transform: none;
+        width: 100%;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .content-wrapper {
+        padding: 30px 15px;
+      }
+
+      .info-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .breadcrumb {
+        padding: 15px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header superior con logos -->
+  <div class="top-header">
+    <div class="logos-left">
+      <img src="../imagenes/sep.png" alt="Logo SEP">
+      <img src="../imagenes/dgeti.png" alt="Logo DGETI">
+    </div>
+    <div class="logos-right">
+      <img src="../imagenes/dgeti.png" alt="Logo DGETI">
+      <img src="../imagenes/cbtis.png" alt="Logo CBTis 227">
+    </div>
+  </div>
+
+  <!-- Banner de bienvenida -->
+  <div class="welcome-banner">
+    <h1>CENTRO DE BACHILLERATO TECNOLÓGICO INDUSTRIAL Y DE SERVICIOS NO.227</h1>
+  </div>
+
+  <!-- Menú de navegación -->
+<nav class="menu">
+    <div class="menu__container">
+      <ul class="menu__links">
+        <li class="menu__item">
+          <a href="/index.html" class="menu__link">INICIO</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="/alumnos/alumnos.html" class="menu__link">
+            ALUMNOS
+            <span class="menu__arrow"></span>
+          </a>
+          <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="/alumnos/tramites.html" class="menu__link menu__link--inside">Tramites/Servicios</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/alumnos/privacidad.html" class="menu__link menu__link--inside">Aviso de privacidad</a>
+            </li>
+            <li class="menu__inside">
+              <a href="#" class="menu__link menu__link--inside">Protocolos de convivencia</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menu__item">
+          <a href="oferta.html" class="menu__link">OFERTA EDUCATIVA</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">SERVICIOS ESCOLARES
+            <span class="menu__arrow"></span>
+          </a>
+       
+         <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="/servicios/becas.html" class="menu__link menu__link--inside">Becas</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/promocion.html" class="menu__link menu__link--inside">Promoción Cultural y Deportiva</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/orientacion.html" class="menu__link menu__link--inside">Orientación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/servicio_social.html" class="menu__link menu__link--inside">Servicio Social y Titulación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/biblioteca.html" class="menu__link menu__link--inside">Biblioteca</a>
+            </li>
+            <li class="menu__inside">
+              <a href="/servicios/enfermeria.html" class="menu__link menu__link--inside">Enfermeria</a>
+            </li>
+          </ul>
+           </li>
+
+        <li class="menu__item">
+          <a href="acercade.html" class="menu__link">ACERCA DE</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">CONTÁCTANOS</a>
+        </li>
+          <div class="search-bar">
+          <input type="text" placeholder="Buscar...">
+          <button>Buscar</button>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="../index.html">Inicio</a>
+    <span>›</span>
+    <span>Acerca de</span>
+  </div>
+
+  <!-- Header de la página -->
+  <div class="page-header">
+    <h1>Acerca de la institución</h1>
+    <p>Nose que poner aqui</p>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="content-wrapper">
+    
+    <!-- Sección de introducción -->
+    <section class="content-section">
+      <h2>Misión</h2>
+      <p>
+        Formar bachilleres técnicos competentes, con valores éticos y sociales, capaces de integrarse al ámbito laboral y continuar estudios superiores, contribuyendo al desarrollo económico y social de la comunidad.
+      </p>
+      <h2>Visión</h2>
+      <p>
+        Ser una institución educativa de nivel medio superior reconocida por su calidad académica, su vinculación con el sector productivo y su compromiso con la formación integral de los estudiantes.
+      </p>
+    </section>
+
+    <!-- Alerta importante -->
+    <div class="alert">
+      <h4>Oferta Educativa</h4>
+      <p>El CBTis No. 227 ofrece Bachillerato Tecnológico con carreras técnicas que combinan formación general y profesional. Entre las especialidades más comunes dentro de los planteles DGETI se encuentran:</p>
+    </div>
+
+    <!-- Cards de tipos de becas -->
+    <section class="content-section">
+      <h2>Especialidades</h2>
+      
+      <div class="info-cards">
+        <div class="info-card">
+          <span class="icon">🎓</span>
+          <h3>Técnico en Programación</h3>
+          <p>Desarrolla software, aplicaciones y sistemas informáticos utilizando diversos lenguajes de programación.</p>
+          <a href="#" class="btn">Más información</a>
+        </div>
+
+        <div class="info-card">
+          <span class="icon">🏠</span>
+          <h3>Técnico en Contabilidad</h3>
+          <p>El Técnico en Contabilidad es un profesional capacitado para apoyar en los procesos administrativos y financieros de empresas, instituciones públicas o negocios particulares. Su formación le permite llevar registros contables, elaborar estados financieros y cumplir con obligaciones fiscales.</p>
+          <a href="#" class="btn">Más información</a>
+        </div>
+
+        <div class="info-card">
+          <span class="icon">🚌</span>
+          <h3>Técnico en Ofimática</h3>
+          <p>Aprende a crear, editar y administrar documentos, hojas de cálculo, bases de datos y presentaciones, además de brindar soporte técnico básico en oficinas. Está preparado para trabajar en áreas administrativas, educativas o empresariales, optimizando procesos mediante el uso eficiente de programas como Word, Excel, PowerPoint, Access y software de gestión.</p>
+          <a href="#" class="btn">Más información</a>
+        </div>
+
+        <div class="info-card">
+          <span class="icon">🚌</span>
+          <h3>Técnico en Administración de Recursos Humanos</h3>
+          <p>Un Técnico en Administración de Recursos Humanos se forma para gestionar el talento dentro de una organización, aplicando técnicas de reclutamiento, selección, capacitación, evaluación y desarrollo del personal. Aprende sobre legislación laboral, nóminas, relaciones laborales y clima organizacional, con el objetivo de mejorar la productividad y el bienestar de los trabajadores. Puede desempeñarse en departamentos de recursos humanos, empresas privadas o dependencias públicas.</p>
+          <a href="#" class="btn">Más información</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+    <h2>CAED (Centro de Atención para estudiantes con Discapacidad)</h2>
+      <p>
+        Con el Centro de Atención para Estudiantes con Discapacidad (CAED) el CBTis 227 brinda el servicio educativo a alumnos que presenten algún tipo de discapacidad (intelectual, motriz, visual o auditiva), y de esta forma puedan iniciar y concluir el bachillerato en la modalidad no escolarizada teniendo la posibilidad de ingresar a un nivel educativo más alto o integrarse a un área productiva.
+      </p>
+    </section>
+    <!-- Información de contacto -->
+    <section class="content-section">
+      <h2>¿Necesitas Más Información?</h2>
+      <div class="info-cards">
+        <div class="info-card">
+          <span class="icon">📧</span>
+          <h3>Correo Electrónico</h3>
+          <p>control.escolar-tm@cbtis227.edu.mx</p>
+        </div>
+
+        <div class="info-card">
+          <span class="icon">📞</span>
+          <h3>Teléfono</h3>
+          <p>(55) 1234-5678<br> 
+          ext. 100</p>
+        </div>
+
+        <div class="info-card">
+          <span class="icon">🕒</span>
+          <h3>Horario de Atención</h3>
+          <p>Lunes a Viernes<br>Matutino<br>
+            7:00 AM - 2:00 PM<br>
+          Vespertino<br>
+        2:00 PM - 9:00 PM</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 CBTis 227 - Centro de Bachillerato Tecnológico Industrial y de Servicios No. 227</p>
+    <p>Otilio Edmundo Montaño Sánchez - Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>

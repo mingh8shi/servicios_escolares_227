@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orientación Educativa - CBTis 227</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+
+    .top-header {
+      background-color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      border-bottom: 3px solid #A7201F;
+    }
+
+    .top-header img {
+      height: 60px;
+    }
+
+    .logos-left, .logos-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .logos-left img, .logos-right img {
+      height: 50px; /* Ajusta este valor */
+      width: auto; /* Mantiene la proporción */
+      object-fit: contain; /* Evita distorsión */
+    }
+
+    .logos-right img:last-child {
+      height: 80px; /* Aumenta solo el último logo de la derecha */
+    }
+
+    .logos-left img:first-child {
+      height: 45px; /* Aumenta solo el primer logo de la izquierda */
+    }
+
+    .welcome-banner {
+      background: linear-gradient(135deg, #4d0000 0%, #92000c 100%);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .welcome-banner h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .menu {
+      background-color: #370000;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .menu__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .menu__links {
+      display: flex;
+      list-style: none;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu__item {
+      position: relative;
+      height: 100%;
+      --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+      --transform: rotate(-90deg);
+    }
+
+    .menu__item:hover {
+      --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      --transform: rotate(0);
+    }
+
+    .menu__link {
+      color: #fff;
+      text-decoration: none;
+      padding: 0 25px;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      transition: background-color 0.3s;
+      font-weight: 500;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .menu__link:hover {
+      background-color: #B78629;
+    }
+
+    .menu__arrow {
+      transform: var(--transform);
+      transition: transform .3s;
+      display: block;
+      margin-left: 5px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+    }
+
+    .menu__nesting {
+      list-style: none;
+      transition: clip-path .3s;
+      clip-path: var(--clip);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: max-content;
+      transform: translateY(100%);
+      background-color: #9D9394;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .menu__link--inside {
+      padding: 15px 25px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .menu__link--inside:hover {
+      background-color: #B78629;
+    }
+
+    .breadcrumb {
+      background-color: #f5f5f5;
+      padding: 15px 40px;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: #A7201F;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      color: #B78629;
+    }
+
+    .breadcrumb span {
+      color: #666;
+      margin: 0 10px;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, rgba(167, 32, 31, 0.9), rgba(183, 134, 41, 0.8));
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .content-section {
+      margin-bottom: 50px;
+    }
+
+    .content-section h2 {
+      color: #A7201F;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      border-bottom: 3px solid #B78629;
+      padding-bottom: 10px;
+    }
+
+    .content-section h3 {
+      color: #4a5568;
+      font-size: 1.5rem;
+      margin: 30px 0 15px;
+      font-weight: 600;
+    }
+
+    .content-section p {
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 1.05rem;
+    }
+
+    .content-section ul {
+      margin: 20px 0;
+      padding-left: 30px;
+    }
+
+    .content-section li {
+      margin-bottom: 15px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .service-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-left: 5px solid #A7201F;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .service-card .icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .service-card h3 {
+      color: #A7201F;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      margin-top: 0;
+    }
+
+    .service-card p {
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .alert-info {
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      border-left: 5px solid #2196f3;
+      padding: 25px;
+      border-radius: 10px;
+      margin: 30px 0;
+    }
+
+    .alert-info h4 {
+      color: #1565c0;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .alert-info p {
+      color: #0d47a1;
+      margin: 0;
+    }
+
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin: 30px 0;
+    }
+
+    .column-box {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 15px;
+      border-top: 4px solid #B78629;
+    }
+
+    .column-box h3 {
+      color: #A7201F;
+      margin-bottom: 20px;
+      margin-top: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: #A7201F;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s;
+      margin: 10px 5px;
+    }
+
+    .btn:hover {
+      background-color: #B78629;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(183, 134, 41, 0.4);
+    }
+
+    footer {
+      background-color: #4d0000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 968px) {
+      .top-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .logos-left, .logos-right {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .top-header img {
+        height: 50px;
+      }
+
+      .welcome-banner h1 {
+        font-size: 1.5rem;
+      }
+
+      .menu {
+        height: auto;
+      }
+
+      .menu__links {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .menu__item {
+        width: 100%;
+        height: auto;
+      }
+
+      .menu__link {
+        padding: 15px;
+        justify-content: center;
+      }
+
+      .menu__nesting {
+        position: static;
+        transform: none;
+        width: 100%;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .content-wrapper {
+        padding: 30px 15px;
+      }
+
+      .two-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .service-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-header">
+    <div class="logos-left">
+      <img src="../imagenes/sep.png" alt="Logo SEP">
+      <img src="../imagenes/dgeti.png" alt="Logo DGETI">
+    </div>
+    <div class="logos-right">
+      <img src="../imagenes/dgeti.png" alt="Logo DGETI">
+      <img src="../imagenes/cbtis.png" alt="Logo CBTis 227">
+    </div>
+  </div>
+
+  <div class="welcome-banner">
+    <h1>CENTRO DE BACHILLERATO TECNOLÓGICO INDUSTRIAL Y DE SERVICIOS NO.227</h1>
+  </div>
+
+  <nav class="menu">
+    <div class="menu__container">
+      <ul class="menu__links">
+        <li class="menu__item">
+          <a href="../index.html" class="menu__link">INICIO</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">
+            ALUMNOS
+            <span class="menu__arrow"></span>
+          </a>
+          <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="../alumnos/tramites.html" class="menu__link menu__link--inside">Trámites/Servicios</a>
+            </li>
+            <li class="menu__inside">
+              <a href="../alumnos/privacidad.html" class="menu__link menu__link--inside">Aviso de privacidad</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">
+            SERVICIOS ESCOLARES
+            <span class="menu__arrow"></span>
+          </a>
+          <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="becas.html" class="menu__link menu__link--inside">Becas</a>
+            </li>
+            <li class="menu__inside">
+              <a href="promocion.html" class="menu__link menu__link--inside">Promoción cultural y deportiva</a>
+            </li>
+            <li class="menu__inside">
+              <a href="orientacion.html" class="menu__link menu__link--inside">Orientación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="servicio_social.html" class="menu__link menu__link--inside">Servicio Social y Titulación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="biblioteca.html" class="menu__link menu__link--inside">Biblioteca</a>
+            </li>
+            <li class="menu__inside">
+              <a href="enfermeria.html" class="menu__link menu__link--inside">Enfermería</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu__item">
+          <a href="../otros/acercade.html" class="menu__link">ACERCA DE</a>
+        </li>
+        
+
+        <li class="menu__item">
+          <a href="../otros/oferta.html" class="menu__link">OFERTA EDUCATIVA</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">CONTACTO</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="breadcrumb">
+    <a href="../index.html">Inicio</a>
+    <span>›</span>
+    <a href="#">Servicios Escolares</a>
+    <span>›</span>
+    <span>Orientación Educativa</span>
+  </div>
+
+  <div class="page-header">
+    <h1>Orientación Educativa</h1>
+    <p>Acompañamiento integral para tu desarrollo académico y personal</p>
+  </div>
+
+  <div class="content-wrapper">
+    
+    <section class="content-section">
+      <h2>¿Qué es Orientación Educativa?</h2>
+      <p>
+        El Departamento de Orientación Educativa del CBTis 227 tiene como objetivo principal apoyar a los estudiantes 
+        en su desarrollo integral, brindando herramientas para su crecimiento personal, académico y vocacional. 
+        Trabajamos de manera cercana con estudiantes, padres de familia y docentes para crear un ambiente de 
+        aprendizaje positivo y saludable.
+      </p>
+    </section>
+
+    <div class="alert-info">
+      <h4>💙 Estamos aquí para ti</h4>
+      <p>Tu bienestar es nuestra prioridad. Si necesitas hablar, orientación o simplemente alguien que te escuche, 
+         no dudes en acudir a nosotros. Toda la información que compartas es confidencial.</p>
+    </div>
+
+    <section class="content-section">
+      <h2>Servicios que Ofrecemos</h2>
+      
+      <div class="service-cards">
+        <div class="service-card">
+          <span class="icon">🎓</span>
+          <h3>Orientación Vocacional</h3>
+          <p>Te ayudamos a descubrir tus intereses, habilidades y aptitudes para tomar decisiones informadas sobre 
+             tu futuro profesional. Aplicación de test vocacionales y asesoría personalizada.</p>
+        </div>
+
+        <div class="service-card">
+          <span class="icon">📚</span>
+          <h3>Asesoría Académica</h3>
+          <p>Apoyo en técnicas de estudio, organización del tiempo, estrategias de aprendizaje y seguimiento 
+             del desempeño escolar para mejorar tus calificaciones.</p>
+        </div>
+
+        <div class="service-card">
+          <span class="icon">💭</span>
+          <h3>Apoyo Psicológico</h3>
+          <p>Atención individual y grupal para problemas emocionales, manejo del estrés, ansiedad, autoestima 
+             y relaciones interpersonales.</p>
+        </div>
+
+        <div class="service-card">
+          <span class="icon">👥</span>
+          <h3>Talleres y Conferencias</h3>
+          <p>Sesiones grupales sobre temas relevantes: prevención de adicciones, educación sexual, valores, 
+             proyecto de vida y habilidades socioemocionales.</p>
+        </div>
+
+        <div class="service-card">
+          <span class="icon">👨‍👩‍👧</span>
+          <h3>Escuela para Padres</h3>
+          <p>Encuentros periódicos con padres de familia para fortalecer la comunicación familiar y 
+             brindar herramientas para apoyar a sus hijos en la etapa adolescente.</p>
+        </div>
+
+        <div class="service-card">
+          <span class="icon">🎯</span>
+          <h3>Canalizaciones</h3>
+          <p>En casos que requieran atención especializada, establecemos coordinación con instituciones 
+             de salud mental y servicios sociales externos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Áreas de Intervención</h2>
+      
+      <div class="two-columns">
+        <div class="column-box">
+          <h3>Orientación Personal</h3>
+          <ul>
+            <li>Desarrollo de habilidades socioemocionales</li>
+            <li>Autoconocimiento y autoestima</li>
+            <li>Manejo de emociones y estrés</li>
+            <li>Resolución de conflictos</li>
+            <li>Comunicación asertiva</li>
+            <li>Prevención de conductas de riesgo</li>
+          </ul>
+        </div>
+
+        <div class="column-box">
+          <h3>Orientación Escolar</h3>
+          <ul>
+            <li>Técnicas y hábitos de estudio</li>
+            <li>Administración del tiempo</li>
+            <li>Estrategias de aprendizaje</li>
+            <li>Motivación académica</li>
+            <li>Prevención del fracaso escolar</li>
+            <li>Integración grupal</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>¿Cuándo Acudir a Orientación?</h2>
+      <p>Es importante que acudas al Departamento de Orientación si:</p>
+      <ul>
+        <li><strong>Tienes dudas sobre tu futuro profesional</strong> - No sabes qué carrera estudiar o necesitas información sobre universidades</li>
+        <li><strong>Presentas problemas académicos</strong> - Bajas calificaciones, dificultad para concentrarte o problemas para estudiar</li>
+        <li><strong>Atraviesas situaciones personales difíciles</strong> - Problemas familiares, duelos, rupturas o conflictos emocionales</li>
+        <li><strong>Experimentas ansiedad o estrés</strong> - Te sientes abrumado, nervioso o angustiado constantemente</li>
+        <li><strong>Tienes problemas de convivencia</strong> - Conflictos con compañeros, bullying o dificultades para relacionarte</li>
+        <li><strong>Necesitas orientación sobre alguna decisión importante</strong> - Cualquier situación donde requieras apoyo y consejo</li>
+      </ul>
+    </section>
+
+    <section class="content-section">
+      <h2>Horarios de Atención</h2>
+      
+      <div class="service-cards">
+        <div class="service-card">
+          <span class="icon">🌅</span>
+          <h3>Turno Matutino</h3>
+          <p><strong>Lunes a Viernes</strong><br>
+             7:00 AM - 2:00 PM</p>
+          <p><strong>Orientador(a):</strong><br>
+             Psic. María Elena González Pérez</p>
+        </div>
+
+        <div class="service-card">
+          <span class="icon">🌆</span>
+          <h3>Turno Vespertino</h3>
+          <p><strong>Lunes a Viernes</strong><br>
+             2:00 PM - 8:00 PM</p>
+          <p><strong>Orientador(a):</strong><br>
+             Psic. Carlos Alberto Ramírez Torres</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="alert-info">
+      <h4>📞 ¿Necesitas una cita?</h4>
+      <p>Puedes agendar una cita acudiendo directamente al Departamento de Orientación (Edificio A, Planta Baja) 
+         o enviando un correo a orientacion@cbtis227.edu.mx. Las consultas son gratuitas y confidenciales.</p>
+    </div>
+
+    <section class="content-section">
+      <h2>Recursos Útiles</h2>
+      <div class="service-cards">
+        <div class="service-card">
+          <span class="icon">🌐</span>
+          <h3>Líneas de Ayuda 24/7</h3>
+          <p><strong>Línea de la Vida:</strong> 800-911-2000<br>
+             <strong>SAPTEL:</strong> 55-5259-8121<br>
+             <strong>Consejo Ciudadano:</strong> 55-5533-5533</p>
+        </div>
+
+        <div class="service-card">
+          <span class="icon">📖</span>
+          <h3>Material de Apoyo</h3>
+          <p>Descarga guías, test vocacionales y material sobre técnicas de estudio en nuestra sección de recursos.</p>
+          <a href="#" class="btn">Ver Recursos</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" style="text-align: center; margin-top: 50px;">
+      <h2>Recuerda...</h2>
+      <p style="font-size: 1.2rem; font-weight: 600; color: #A7201F;">
+        "Pedir ayuda no es signo de debilidad, es un acto de valentía y amor propio"
+      </p>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 CBTis 227 - Centro de Bachillerato Tecnológico Industrial y de Servicios No. 227</p>
+    <p>Otilio Edmundo Montaño Sánchez - Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>

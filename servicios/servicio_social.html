@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicio Social y Titulación - CBTis 227</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+
+    .top-header {
+      background-color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      border-bottom: 3px solid #A7201F;
+    }
+
+    .top-header img {
+      height: 60px;
+    }
+
+    .logos-left, .logos-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .logos-left img, .logos-right img {
+      height: 50px; /* Ajusta este valor */
+      width: auto; /* Mantiene la proporción */
+      object-fit: contain; /* Evita distorsión */
+    }
+
+    .logos-right img:last-child {
+      height: 80px; /* Aumenta solo el último logo de la derecha */
+    }
+
+    .logos-left img:first-child {
+      height: 45px; /* Aumenta solo el primer logo de la izquierda*/
+    }
+
+    .welcome-banner {
+      background: linear-gradient(135deg, #4d0000 0%, #92000c  100%);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .welcome-banner h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .menu {
+      background-color: #370000;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .menu__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .menu__links {
+      display: flex;
+      list-style: none;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu__item {
+      position: relative;
+      height: 100%;
+      --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+      --transform: rotate(-90deg);
+    }
+
+    .menu__item:hover {
+      --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      --transform: rotate(0);
+    }
+
+    .menu__link {
+      color: #fff;
+      text-decoration: none;
+      padding: 0 25px;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      transition: background-color 0.3s;
+      font-weight: 500;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .menu__link:hover {
+      background-color: #B78629;
+    }
+
+    .menu__arrow {
+      transform: var(--transform);
+      transition: transform .3s;
+      display: block;
+      margin-left: 5px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+    }
+
+    .menu__nesting {
+      list-style: none;
+      transition: clip-path .3s;
+      clip-path: var(--clip);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: max-content;
+      transform: translateY(100%);
+      background-color: #9D9394;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .menu__link--inside {
+      padding: 15px 25px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .menu__link--inside:hover {
+      background-color: #B78629;
+    }
+
+    .breadcrumb {
+      background-color: #f5f5f5;
+      padding: 15px 40px;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: #A7201F;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      color: #B78629;
+    }
+
+    .breadcrumb span {
+      color: #666;
+      margin: 0 10px;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, rgba(167, 32, 31, 0.9), rgba(183, 134, 41, 0.8));
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .content-section {
+      margin-bottom: 50px;
+    }
+
+    .content-section h2 {
+      color: #A7201F;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      border-bottom: 3px solid #B78629;
+      padding-bottom: 10px;
+    }
+
+    .content-section h3 {
+      color: #4a5568;
+      font-size: 1.5rem;
+      margin: 30px 0 15px;
+      font-weight: 600;
+    }
+
+    .content-section p {
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 1.05rem;
+    }
+
+    .content-section ul, .content-section ol {
+      margin: 20px 0;
+      padding-left: 30px;
+    }
+
+    .content-section li {
+      margin-bottom: 15px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .info-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .info-box {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-top: 5px solid #A7201F;
+    }
+
+    .info-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .info-box .icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .info-box h3 {
+      color: #A7201F;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      margin-top: 0;
+    }
+
+    .info-box p {
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .steps-container {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 15px;
+      padding: 40px;
+      margin: 40px 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      align-items: start;
+    }
+
+    .step:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-number {
+      background: linear-gradient(135deg, #A7201F, #B78629);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 {
+      margin: 0 0 10px 0;
+      color: #A7201F;
+    }
+
+    .step-content p {
+      margin: 0;
+      color: #555;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 30px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    table thead {
+      background: linear-gradient(135deg, #A7201F, #B78629);
+      color: white;
+    }
+
+    table th, table td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    table tbody tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    table tbody tr:hover {
+      background-color: #e9ecef;
+    }
+
+    .alert {
+      background-color: #fff3cd;
+      border-left: 5px solid #B78629;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+    }
+
+    .alert h4 {
+      color: #856404;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .alert p {
+      color: #856404;
+      margin: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: #A7201F;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s;
+      margin: 10px 5px;
+    }
+
+    .btn:hover {
+      background-color: #B78629;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(183, 134, 41, 0.4);
+    }
+
+    .btn-secondary {
+      background-color: #4a5568;
+    }
+
+    .btn-secondary:hover {
+      background-color: #2d3748;
+    }
+
+    footer {
+      background-color: #4d0000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 968px) {
+      .top-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .logos-left, .logos-right {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .top-header img {
+        height: 50px;
+      }
+
+      .welcome-banner h1 {
+        font-size: 1.5rem;
+      }
+
+      .menu {
+        height: auto;
+      }
+
+      .menu__links {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .menu__item {
+        width: 100%;
+        height: auto;
+      }
+
+      .menu__link {
+        padding: 15px;
+        justify-content: center;
+      }
+
+      .menu__nesting {
+        position: static;
+        transform: none;
+        width: 100%;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .content-wrapper {
+        padding: 30px 15px;
+      }
+
+      .info-boxes {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-header">
+    <div class="logos-left">
+      <img src="../imagenes/sep.png" alt="Logo SEP">
+      <img src="../imagenes/dgeti.png" alt="Logo DGETI">
+    </div>
+    <div class="logos-right">
+      <img src="../imagenes/dgeti.png" alt="Logo DGETI">
+      <img src="../imagenes/cbtis.png" alt="Logo CBTis 227">
+    </div>
+  </div>
+
+  <div class="welcome-banner">
+    <h1>CENTRO DE BACHILLERATO TECNOLÓGICO INDUSTRIAL Y DE SERVICIOS NO.227</h1>
+  </div>
+
+  <nav class="menu">
+    <div class="menu__container">
+      <ul class="menu__links">
+        <li class="menu__item">
+          <a href="../index.html" class="menu__link">INICIO</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">
+            ALUMNOS
+            <span class="menu__arrow"></span>
+          </a>
+          <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="../alumnos/tramites.html" class="menu__link menu__link--inside">Trámites/Servicios</a>
+            </li>
+            <li class="menu__inside">
+              <a href="../alumnos/privacidad.html" class="menu__link menu__link--inside">Aviso de privacidad</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">
+            SERVICIOS ESCOLARES
+            <span class="menu__arrow"></span>
+          </a>
+          <ul class="menu__nesting">
+            <li class="menu__inside">
+              <a href="becas.html" class="menu__link menu__link--inside">Becas</a>
+            </li>
+            <li class="menu__inside">
+              <a href="promocion.html" class="menu__link menu__link--inside">Promoción cultural y deportiva</a>
+            </li>
+            <li class="menu__inside">
+              <a href="orientacion.html" class="menu__link menu__link--inside">Orientación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="servicio_social.html" class="menu__link menu__link--inside">Servicio Social y Titulación</a>
+            </li>
+            <li class="menu__inside">
+              <a href="biblioteca.html" class="menu__link menu__link--inside">Biblioteca</a>
+            </li>
+            <li class="menu__inside">
+              <a href="enfermeria.html" class="menu__link menu__link--inside">Enfermería</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu__item">
+          <a href="../otros/acercade.html" class="menu__link">ACERCA DE</a>
+        </li>
+        
+
+        <li class="menu__item">
+          <a href="../otros/oferta.html" class="menu__link">OFERTA EDUCATIVA</a>
+        </li>
+
+        <li class="menu__item">
+          <a href="#" class="menu__link">CONTACTO</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="breadcrumb">
+    <a href="../index.html">Inicio</a>
+    <span>›</span>
+    <a href="#">Servicios Escolares</a>
+    <span>›</span>
+    <span>Servicio Social y Titulación</span>
+  </div>
+
+  <div class="page-header">
+    <h1>Servicio Social y Titulación</h1>
+    <p>Tu camino hacia la obtención del título profesional técnico</p>
+  </div>
+
+  <div class="content-wrapper">
+    
+    <section class="content-section">
+      <h2>Información General</h2>
+      <p>
+        El Servicio Social es una actividad obligatoria que deben realizar todos los estudiantes de nivel medio 
+        superior como parte de su formación integral y retribución a la sociedad. Además, es un requisito 
+        indispensable para la obtención del título de Profesional Técnico.
+      </p>
+    </section>
+
+    <div class="info-boxes">
+      <div class="info-box">
+        <span class="icon">⏱️</span>
+        <h3>Duración</h3>
+        <p>El Servicio Social tiene una duración mínima de <strong>480 horas</strong>, las cuales debes cumplir 
+           en un período no menor a 6 meses.</p>
+      </div>
+
+      <div class="info-box">
+        <span class="icon">📋</span>
+        <h3>Requisito de Inicio</h3>
+        <p>Debes haber cubierto al menos el <strong>70% de los créditos</strong> de tu plan de estudios 
+           (estar cursando 5to o 6to semestre).</p>
+      </div>
+
+      <div class="info-box">
+        <span class="icon">🎯</span>
+        <h3>Objetivo</h3>
+        <p>Aplicar los conocimientos adquiridos en beneficio de la comunidad y desarrollar habilidades 
+           profesionales en situaciones reales.</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <h2>Proceso de Servicio Social</h2>
+      
+      <div class="steps-container">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Registro e Inscripción</h3>
+            <p>Acude al Departamento de Vinculación con los siguientes documentos: credencial de estudiante, 
+               kardex actualizado y carta de presentación que se te proporcionará en el departamento.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Elección de Institución</h3>
+            <p>Puedes elegir entre las instituciones con convenio o proponer una nueva. La institución debe 
+               estar relacionada con tu especialidad técnica.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Inicio de Actividades</h3>
+            <p>Una vez aceptado, inicia tus actividades en la fecha acordada. Recuerda llevar el control 
+               de horas en tu formato oficial.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Reportes Bimestrales</h3>
+            <p>Entrega reportes cada dos meses donde describas las actividades realizadas y las horas cumplidas.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h3>Liberación</h3>
+            <p>Al completar las 480 horas, solicita tu carta de liberación de Servicio Social en el 
+               Departamento de Vinculación.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="alert">
+      <h4>⚠️ Importante</h4>
+      <p>El Servicio Social NO puede realizarse en instituciones con fines de lucro, ni en negocios familiares. 
+         Debe ser en instituciones públicas o asociaciones civiles sin fines de lucro.</p>
+    </div>
+
+    <section class="content-section">
+      <h2>Opciones de Titulación</h2>
+      <p>
+        Para obtener tu Cédula Profesional de Profesional Técnico, debes elegir una de las siguientes 
+        modalidades de titulación:
+      </p>
+
+      <div class="info-boxes">
+        <div class="info-box">
+          <span class="icon">📝</span>
+          <h3>Promedio de 8.0 o Superior</h3>
+          <p>Si tu promedio general es de 8.0 o superior, puedes titularte automáticamente sin necesidad 
+             de examen o proyecto adicional.</p>
+        </div>
+
+        <div class="info-box">
+          <span class="icon">📊</span>
+          <h3>Examen Profesional</h3>
+          <p>Presentar y aprobar un examen teórico-práctico ante un jurado calificador sobre los conocimientos 
+             de tu especialidad técnica.</p>
+        </div>
+
+        <div class="info-box">
+          <span class="icon">💼</span>
+          <h3>Experiencia Profesional</h3>
+          <p>Comprobar 2 años de experiencia laboral en el área de tu especialidad mediante constancias 
+             y carta patronal.</p>
+        </div>
+
+        <div class="info-box">
+          <span class="icon">📖</span>
+          <h3>Memoria de Trabajo</h3>
+          <p>Elaborar un documento que describa y analice las actividades realizadas durante tu Servicio 
+             Social o prácticas profesionales.</p>
+        </div>
+
+        <div class="info-box">
+          <span class="icon">🔬</span>
+          <h3>Proyecto de Investigación</h3>
+          <p>Desarrollar un proyecto de investigación relacionado con tu área técnica y presentarlo ante 
+             un comité evaluador.</p>
+        </div>
+
+        <div class="info-box">
+          <span class="icon">📜</span>
+          <h3>CENEVAL</h3>
+          <p>Presentar el Examen General de Egreso de la Educación Media Superior (EGEEMS) del CENEVAL 
+             y obtener resultado satisfactorio.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Requisitos para Titulación</h2>
+      
+      <h3>Documentación Necesaria</h3>
+      <ol>
+        <li>Acta de nacimiento certificada (original y 2 copias)</li>
+        <li>Certificado de Bachillerato (original y 2 copias)</li>
+        <li>Certificado de Secundaria (original y 2 copias)</li>
+        <li>CURP (2 copias)</li>
+        <li>6 fotografías tamaño infantil blanco y negro, papel mate</li>
+        <li>Carta de liberación de Servicio Social</li>
+        <li>Comprobante de pago de derechos</li>
+        <li>Formato de solicitud de titulación</li>
+      </ol>
+
+      <h3>Requisitos Académicos</h3>
+      <ul>
+        <li>Haber cubierto el 100% de los créditos del plan de estudios</li>
+        <li>No tener adeudos en biblioteca o laboratorios</li>
+        <li>Carta de liberación de Servicio Social (480 horas cumplidas)</li>
+        <li>Estar al corriente en pagos administrativos</li>
+      </ul>
+    </section>
+
+    <section class="content-section">
+      <h2>Calendario de Titulación 2025</h2>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Período</th>
+              <th>Entrega de Documentos</th>
+              <th>Revisión</th>
+              <th>Fecha de Examen/Entrega</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>-----</td>
+              <td>-----</td>
+              <td>-----</td>
+              <td>-----</td>
+            </tr>
+            <tr>
+              <td>-----</td>
+              <td>-----</td>
+              <td>-----</td>
+              <td>-----</td>
+            </tr>
+            <tr>
+              <td>-----</td>
+              <td>-----</td>
+              <td>-----</td>
+              <td>-----</td>
+            </tr>
+            <tr>
+              <td>-----</td>
+              <td>-----</td>
+              <td>-----</td>
+              <td>-----</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Preguntas Frecuentes</h2>
+      
+      <div class="info-boxes">
+        <div class="info-box">
+          <h3>¿Puedo hacer mi Servicio Social en línea?</h3>
+          <p>Algunas instituciones ofrecen programas virtuales, pero deben estar oficialmente registradas 
+             y aprobadas por el plantel.</p>
+        </div>
+
+        <div class="info-box">
+          <h3>¿Cuánto tiempo tarda el trámite de titulación?</h3>
+          <p>El proceso completo, desde la entrega de documentos hasta la obtención del título, puede 
+             tomar de 4 a 6 meses aproximadamente.</p>
+        </div>
+
+        <div class="info-box">
+          <h3>¿Tiene costo la titulación?</h3>
+          <p>Sí, existe un costo por derechos de expedición de título y cédula profesional. Consulta 
+             los montos actualizados en Control Escolar.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" style="text-align: center; margin-top: 50px;">
+      <h2>¿Listo para Iniciar tu Proceso?</h2>
+      <p>Acércate al Departamento de Vinculación y comienza tu camino hacia la titulación</p>
+      <a href="#" class="btn">Descargar Formatos</a>
+      <a href="#" class="btn btn-secondary">Instituciones con Convenio</a>
+    </section>
+
+    <div class="info-boxes" style="margin-top: 50px;">
+      <div class="info-box">
+        <span class="icon">📍</span>
+        <h3>Ubicación</h3>
+        <p>Departamento de Vinculación<br>Edificio D, planta baja</p>
+      </div>
+
+      <div class="info-box">
+        <span class="icon">⏰</span>
+        <h3>Horario de Atención</h3>
+        <p>Lunes a Viernes<br>7:00 AM - 2:00 PM<br>2:00 PM - 9:00 PM</p>
+      </div>
+
+      <div class="info-box">
+        <span class="icon">📧</span>
+        <h3>Contacto</h3>
+        <p>vinculacion@cbtis227.edu.mx<br>Tel: (55) 1234-5678 Ext. 120</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 CBTis 227 - Centro de Bachillerato Tecnológico Industrial y de Servicios No. 227</p>
+    <p>Otilio Edmundo Montaño Sánchez - Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>
