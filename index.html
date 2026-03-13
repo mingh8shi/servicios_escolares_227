@@ -215,129 +215,51 @@
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Sección de Noticias */
-.news-section {
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  max-height: 450px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+.quick-section{
+  padding: 20px;
 }
 
-.news-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.quick-header h2{
+  color: #A7201F;
   margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 3px solid #A7201F;
 }
 
-.news-header h2 {
-  color: #A7201F;
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 0;
+.quick-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 15px;
 }
 
-.news-header a {
-  color: #B78629;
+.quick-card{
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 18px;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: color 0.3s;
+  color: #000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
 }
 
-.news-header a:hover {
+.quick-card:hover{
+  transform: translateY(-5px);
+  border-left: 5px solid #B78629;
+}
+
+.quick-icon{
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.quick-title{
+  font-weight: bold;
   color: #A7201F;
-}
-
-/* Lista de noticias */
-.news-list {
-  overflow-y: auto;
-  max-height: 320px;
-  padding-right: 10px;
-}
-
-.news-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.news-list::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.news-list::-webkit-scrollbar-thumb {
-  background: #A7201F;
-  border-radius: 10px;
-}
-
-.news-list::-webkit-scrollbar-thumb:hover {
-  background: #B78629;
-}
-
-.news-item {
-  padding: 15px;
-  margin-bottom: 12px;
-  border-left: 4px solid #A7201F;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.news-item:hover {
-  background-color: #fff;
-  border-left-color: #B78629;
-  transform: translateX(5px);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-.news-date {
-  color: #666;
-  font-size: 0.85rem;
-  font-weight: 500;
   margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
 }
 
-.news-date::before {
-  content: "📅";
-  font-size: 0.9rem;
+.quick-desc{
+  font-size: 14px;
+  color: #555;
 }
-
-.news-title {
-  color: #333;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-
-.news-description {
-  color: #666;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  margin-bottom: 8px;
-}
-
-.news-tag {
-  display: inline-block;
-  background-color: #A7201F;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 15px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
 /* Responsive */
 @media (max-width: 968px) {
   .hero {
@@ -745,7 +667,7 @@
               <a href="/alumnos/privacidad.html" class="menu__link menu__link--inside">Aviso de privacidad</a>
             </li>
             <li class="menu__inside">
-              <a href="/alumnos/protocolos.html" class="menu__link menu__link--inside">Protocolos de convivencia</a>
+              <a href="https://sites.google.com/cbtis227.edu.mx/protocolo-vigente-en-cbtis227/inicio?authuser=2" class="menu__link menu__link--inside">Protocolos de seguridad</a>
             </li>
           </ul>
         </li>
@@ -812,17 +734,17 @@
         </div>
       </div>
       <div class="carousel-slide">
-        <img src="imagenes/foto3.jpg" alt="Estudiantes">
+        <img src="imagenes/biblioiteca1.png" alt="Biblioteca">
         <div class="carousel-caption">
-          <h3>Comunidad Estudiantil</h3>
-          <p>Formando profesionales del futuro</p>
+          <h3>Áreas de recreación</h3>
+          <p>Ideales para fomentar el deporte y el entretenimiento</p>
         </div>
       </div>
       <div class="carousel-slide">
-        <img src="imagenes/foto4.jpg" alt="Talleres">
+        <img src="imagenes/comunidad.png" alt="Talleres">
         <div class="carousel-caption">
-          <h3>Talleres Especializados</h3>
-          <p>Práctica profesional desde el primer día</p>
+          <h3>Comunidad Estudiantil</h3>
+          <p>Formando profesionales del futuro</p>
         </div>
       </div>
     </div>
@@ -869,59 +791,40 @@
     </div>
 
     <!-- Sección de Noticias a la derecha -->
-    <div class="news-section">
-      <div class="news-header">
-        <h2>📰 Noticias Recientes</h2>
-        <a href="otros/noticias.html">Ver todas →</a>
-      </div>
+    <div class="right-section">
 
-      <div class="news-list">
-        <div class="news-item">
-          <div class="news-date">17 de Noviembre, 2025</div>
-          <div class="news-title">Noticia 1</div>
-          <div class="news-description">
-            Informacion noticia 1
-          </div>
-          <span class="news-tag">Instalaciones</span>
-        </div>
+  <!-- Accesos Rápidos -->
+  <div class="quick-section">
 
-        <div class="news-item">
-          <div class="news-date">15 de Noviembre, 2025</div>
-          <div class="news-title">Convocatoria de Becas 2025 Abierta</div>
-          <div class="news-description">
-            Ya puedes solicitar tu beca para el ciclo escolar 2025. Revisa los requisitos y fechas límite en el departamento de becas.
-          </div>
-          <span class="news-tag">Becas</span>
-        </div>
-
-        <div class="news-item">
-          <div class="news-date">10 de Noviembre, 2025</div>
-          <div class="news-title">Torneo Deportivo Interescolar 2025</div>
-          <div class="news-description">
-            Nuestros equipos de fútbol y básquetbol representarán al plantel en el torneo estatal. ¡Ven a apoyarlos!
-          </div>
-          <span class="news-tag">Deportes</span>
-        </div>
-
-        <div class="news-item">
-          <div class="news-date">5 de Noviembre, 2025</div>
-          <div class="news-title">Proceso de Inscripción para Nuevo Ingreso</div>
-          <div class="news-description">
-            Conoce las fechas y requisitos para el proceso de inscripción del ciclo escolar 2025-2026. ¡No te quedes fuera!
-          </div>
-          <span class="news-tag">Inscripciones</span>
-        </div>
-
-        <div class="news-item">
-          <div class="news-date">1 de Noviembre, 2025</div>
-          <div class="news-title">Festival Cultural de Día de Muertos</div>
-          <div class="news-description">
-            Exitoso festival donde alumnos mostraron ofrendas tradicionales y participaron en actividades culturales.
-          </div>
-          <span class="news-tag">Eventos</span>
-        </div>
-      </div>
+    <div class="quick-header">
+      <h2>⚡ Accesos Rápidos</h2>
     </div>
+
+    <div class="quick-grid">
+
+      <a href="/imagenes/calendario_2025-2026.png" class="quick-card">
+        <div class="quick-icon">📅</div>
+        <div class="quick-title">Calendario Escolar</div>
+        <div class="quick-desc">Consulta fechas importantes del ciclo escolar.</div>
+      </a>
+
+      <a href="/servicios/becas.html" class="quick-card">
+        <div class="quick-icon">💰</div>
+        <div class="quick-title">Becas</div>
+        <div class="quick-desc">Información sobre becas disponibles.</div>
+      </a>
+
+      <a href="servicios/servicio_social.html" class="quick-card">
+        <div class="quick-icon">🎓</div>
+        <div class="quick-title">Servicio Social y Titulación</div>
+        <div class="quick-desc">Requisitos y proceso y Opciones para titularte</div>
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
   </div>
 </div>
 
@@ -932,16 +835,14 @@
   <!-- Contenedor flexible para los dos elementos -->
   <div style="display: flex; flex-wrap: wrap; gap: 25px;">
     
-    <!-- COLUMNA IZQUIERDA: PDFs DE CALENDARIOS -->
+    <!-- COLUMNA IZQUIERDA: PDFs DE CALENDARIOS CON VISTA PREVIA DE IMAGEN -->
     <div style="flex: 1; min-width: 300px;">
       <div style="background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); height: 100%;">
         <h3 style="color: #A7201F; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #B78629; padding-bottom: 10px;">
           <span style="font-size: 28px;">📅</span> Calendario Escolar
         </h3>
         
-        <!-- Calendario 2024-2025 -->
-        
-        <!-- Calendario 2025-2026 -->
+        <!-- Calendario 2025-2026 CON VISTA PREVIA DE IMAGEN -->
         <div style="background: linear-gradient(135deg, #f8f9fa, #ffffff); border-radius: 12px; padding: 20px; border-left: 5px solid #B78629; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
           <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
             <span style="font-size: 40px;">📅</span>
@@ -950,9 +851,23 @@
               <p style="color: #666; font-size: 0.9rem;">Próximo: Agosto 2025 - Julio 2026</p>
             </div>
           </div>
+          
+          <!-- VISTA PREVIA DE LA IMAGEN DEL CALENDARIO -->
+          <div style="margin: 15px 0; border: 2px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: white;">
+            <div style="background: #A7201F; color: white; padding: 8px 15px; font-weight: 600; font-size: 0.9rem;">
+              Vista previa del calendario 2025-2026
+            </div>
+            <div style="padding: 10px; text-align: center;">
+              <img src="imagenes/calendario-2025-2026.jpg" alt="Vista previa del calendario escolar 2025-2026" style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 5px;">
+              <p style="font-size: 0.8rem; color: #666; margin-top: 8px;">
+                * Vista previa del calendario oficial
+              </p>
+            </div>
+          </div>
+          
           <div style="display: flex; gap: 10px; justify-content: flex-end;">
-            <a href="/docs/Calendario-Escolar-DGETI-2025-2026_copia.pdf" target="_blank" class="protocolo-link" style="background-color: #A7201F; padding: 8px 15px; font-size: 0.9rem; color: #ffffff;">Ver Calendario</a>
-            <a href="/docs/Calendario-Escolar-DGETI-2025-2026_copia.pdf" download class="protocolo-link" style="background-color: #B78629; padding: 8px 15px; font-size: 0.9rem; color: #ffffff;">Descargar</a>
+            <a href="/docs/Calendario-Escolar-DGETI-2025-2026_copia.pdf" target="_blank" class="protocolo-link" style="background-color: #A7201F; padding: 8px 15px; font-size: 0.9rem; color: #ffffff; text-decoration: none; border-radius: 5px; display: inline-block;">📄 Ver Completo</a>
+            <a href="/docs/Calendario-Escolar-DGETI-2025-2026_copia.pdf" download class="protocolo-link" style="background-color: #B78629; padding: 8px 15px; font-size: 0.9rem; color: #ffffff; text-decoration: none; border-radius: 5px; display: inline-block;">⬇️ Descargar PDF</a>
           </div>
         </div>
         
@@ -965,14 +880,14 @@
       </div>
     </div>
     
-    <!-- COLUMNA DERECHA: UBICACIÓN CON MAPA -->
+    <!-- COLUMNA DERECHA: UBICACIÓN CON MAPA (sin cambios) -->
     <div style="flex: 1; min-width: 300px;">
       <div style="background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); height: 100%;">
         <h3 style="color: #A7201F; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
           <span style="font-size: 28px;">📍</span> Nuestra Ubicación
         </h3>
         
-        <!-- Tarjeta de dirección mejorada -->
+        <!-- Tarjeta de dirección -->
         <div style="background: linear-gradient(135deg, #f8f9fa, #ffffff); padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #B78629;">
           <p style="font-weight: 600; margin-bottom: 5px;">CBTis 227</p>
           <p style="color: #555; font-size: 0.95rem;">Av. Paseo del Ferrocarril 99, Los Reyes Ixtacala, 54090 Tlalnepantla, Méx.</p>
