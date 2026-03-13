@@ -312,24 +312,16 @@
       margin: 40px 0;
     }
 
-    .gallery-item {
-      height: 250px;
-      background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+    .gallery-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition: transform 0.4s;
+}
 
-    .gallery-item::after {
-      content: '🖼️';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 3rem;
-      opacity: 0.3;
-    }
+.gallery-item:hover img{
+  transform: scale(1.08);
+}
 
     /* Botones */
     .btn {
@@ -501,7 +493,7 @@
         </li>
 
         <li class="menu__item">
-          <a href="#" class="menu__link">CONTACTO</a>
+          <a href="../otros/contacto.html" class="menu__link">CONTACTO</a>
         </li>
       </ul>
     </div>
@@ -644,7 +636,7 @@
             <div class="activity-details">
               
               <div class="activity-detail">
-                <strong>📍 Lugar:</strong> Salón de danza
+                <strong>📍 Lugar:</strong> Auditorio
               </div>
               <div class="activity-detail">
                 <strong>👤 Instructor:</strong>....
@@ -678,7 +670,7 @@
             <div class="activity-details">
               
               <div class="activity-detail">
-                <strong>📍 Lugar:</strong> Salón de danza
+                <strong>📍 Lugar:</strong> Auditorio
               </div>
               <div class="activity-detail">
                 <strong>👤 Instructor:</strong>....
@@ -695,7 +687,7 @@
             <div class="activity-details">
               
               <div class="activity-detail">
-                <strong>📍 Lugar:</strong> Salón de danza
+                <strong>📍 Lugar:</strong> Auditorio
               </div>
               <div class="activity-detail">
                 <strong>👤 Instructor:</strong>....
@@ -778,28 +770,31 @@
       <p>Momentos destacados de nuestras actividades culturales y deportivas</p>
       <div class="gallery">
         <div class="gallery-item">
-          <img src="/imagenes/fotos1.png" alt="Foto 1">
+          <img src="/imagenes/audit.jpg" alt="Foto 1">
         </div>
         <div class="gallery-item">
-          <img src="/imagenes/fotos2.png" alt="Foto 2">
+          <img src="/imagenes/audit3.jpg" alt="Foto 2">
         </div>
         <div class="gallery-item">
-          <img src="/imagenes/fotos3.png" alt="Foto 3">
+          <img src="../imagenes/audit8.jpg" alt="Foto 3">
         </div>
         <div class="gallery-item">
-          <img src="/imagenes/fotos4.png" alt="Foto 4">
+          <img src="../imagenes/bib1.jpg" alt="Foto 4">
         </div>
         <div class="gallery-item">
-          <img src="/imagenes/fotos5.png" alt="Foto 5">
+          <img src="../imagenes/bib3.jpg" alt="Foto 5">
         </div>
         <div class="gallery-item">
-          <img src="/imagenes/fotos6.png" alt="Foto 6">
+          <img src="../imagenes/bib6.jpg" alt="Foto 6">
         </div>
         <div class="gallery-item">
-          <img src="/imagenes/fotos7.png" alt="Foto 7">
+          <img src="../imagenes/bib7.jpg" alt="Foto 7">
         </div>
         <div class="gallery-item">
-          <img src="/imagenes/ofi.jpg" alt="Foto 8">
+          <img src="../imagenes/ofi.jpg" alt="Foto 8">
+        </div>
+        <div class="gallery-item">
+          <img src="../imagenes/depT.jpg" alt="Foto 8">
         </div>
       </div>
       <p style="text-align: center; color: #666; font-style: italic;">
